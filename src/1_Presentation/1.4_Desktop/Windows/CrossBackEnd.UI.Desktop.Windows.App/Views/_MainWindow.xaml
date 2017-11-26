@@ -1,0 +1,48 @@
+﻿<Window x:Class="CrossBackEnd.UI.Desktop.Windows.App.Views._MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CrossBackEnd.UI.Desktop.Windows.App.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="900">
+    <Grid Margin="10,20,10,20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Button Content="Listar Países" Click="Button_Click" Margin="10"/>
+            <Button Content="Cadastrar País" Margin="10"/>
+            <Button Content="Atualizar País" Margin="10"/>
+            <Button Content="Visualizar País" Margin="10"/>
+            <Button Content="Remover País" Margin="10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <Button Content="Listar Estado Federativo" Margin="10"/>
+            <Button Content="Cadastrar Estado Federativo" Margin="10"/>
+            <Button Content="Atualizar Estado Federativo" Margin="10"/>
+            <Button Content="Visualizar Estado Federativo" Margin="10"/>
+            <Button Content="Remover Estado Federativo" Margin="10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2">
+            <Button Content="Listar Cidades" Margin="10"/>
+            <Button Content="Cadastrar Cidade" Margin="10"/>
+            <Button Content="Atualizar Cidade" Margin="10"/>
+            <Button Content="Visualizar Cidade" Margin="10"/>
+            <Button Content="Remover Cidade" Margin="10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2">
+            <Button Content="Listar Clientes" Margin="10"/>
+            <Button Content="Cadastrar Cliente" Margin="10"/>
+            <Button Content="Atualizar Cliente" Margin="10"/>
+            <Button Content="Visualizar Cliente" Margin="10"/>
+            <Button Content="Remover Cliente" Margin="10"/>
+        </StackPanel>
+    </Grid>
+</Window>

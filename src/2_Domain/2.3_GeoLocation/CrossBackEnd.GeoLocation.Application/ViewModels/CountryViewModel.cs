@@ -8,10 +8,10 @@ namespace CrossBackEnd.GeoLocation.Application.ViewModels
 {
     public class CountryViewModel : BaseViewModel<CountryViewModel>
     {
-        public Guid CountryId { get; set; }
-        public string Name { get; set; }
-        public string Abbreviation { get; set; }
-        /*
+        private Guid countryId;
+        private string name;
+        private string abbreviation;
+        
         #region Gets and Sets
 
         [Key]
@@ -26,7 +26,7 @@ namespace CrossBackEnd.GeoLocation.Application.ViewModels
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            set { SetProperty(ref name, value); }
         }
 
         [Required(ErrorMessage = "Informar abreviatura do país é obrigatório.")]
@@ -34,10 +34,9 @@ namespace CrossBackEnd.GeoLocation.Application.ViewModels
         public string Abbreviation
         {
             get { return abbreviation; }
-            set { abbreviation = value; }
+            set { SetProperty(ref abbreviation, value); }
         }
 
         #endregion
-        */
     }
 }

@@ -61,6 +61,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mac", "Mac", "{DF37B7FF-B79
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossBackEnd.UI.Desktop.Windows.App", "src\1_Presentation\1.4_Desktop\Windows\CrossBackEnd.UI.Desktop.Windows.App\CrossBackEnd.UI.Desktop.Windows.App.csproj", "{9C1C470F-9BB1-45DB-B7AC-9C59683421BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossBackEnd.CrossPlatform.Core", "src\1_Presentation\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.Core\CrossBackEnd.CrossPlatform.Core.csproj", "{8FEBC159-BC08-468A-9DBC-E47E4A3EF1B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{9C1C470F-9BB1-45DB-B7AC-9C59683421BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C1C470F-9BB1-45DB-B7AC-9C59683421BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C1C470F-9BB1-45DB-B7AC-9C59683421BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FEBC159-BC08-468A-9DBC-E47E4A3EF1B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FEBC159-BC08-468A-9DBC-E47E4A3EF1B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FEBC159-BC08-468A-9DBC-E47E4A3EF1B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FEBC159-BC08-468A-9DBC-E47E4A3EF1B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,6 +141,7 @@ Global
 		{7B037DDD-604E-48CD-B38F-6B82276F2A7C} = {B2D9A64D-8E2C-4955-9430-DE2F8B0CB334}
 		{DF37B7FF-B79A-4532-BF36-2B08EBE79404} = {B2D9A64D-8E2C-4955-9430-DE2F8B0CB334}
 		{9C1C470F-9BB1-45DB-B7AC-9C59683421BC} = {7B037DDD-604E-48CD-B38F-6B82276F2A7C}
+		{8FEBC159-BC08-468A-9DBC-E47E4A3EF1B6} = {330C1304-1D2E-4307-AA91-A67ABE23F633}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A24C6C6-6FC7-4C7A-A817-0386FC7E7C5A}
