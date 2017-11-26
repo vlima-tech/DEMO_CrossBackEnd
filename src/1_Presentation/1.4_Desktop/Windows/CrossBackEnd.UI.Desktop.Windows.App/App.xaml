@@ -1,8 +1,11 @@
-﻿<Application x:Class="CrossBackEnd.UI.Desktop.Windows.App.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:CrossBackEnd.UI.Desktop.Windows.App"
-             StartupUri="/Views/_MainWindow.xaml">
+﻿<Application 
+    x:Class="CrossBackEnd.UI.Desktop.Windows.App.App"
+    
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CrossBackEnd.UI.Desktop.Windows.App"
+    StartupUri="/Views/_MainWindow.xaml">
+    
     <Application.Resources>
          
     </Application.Resources>

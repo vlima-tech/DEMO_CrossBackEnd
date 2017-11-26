@@ -14,7 +14,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <Button Content="Listar Países" Click="Button_Click" Margin="10"/>
+            <Button Content="Gerenciar Países" Click="Button_Click" Margin="10"/>
             <Button Content="Cadastrar País" Margin="10"/>
             <Button Content="Atualizar País" Margin="10"/>
             <Button Content="Visualizar País" Margin="10"/>

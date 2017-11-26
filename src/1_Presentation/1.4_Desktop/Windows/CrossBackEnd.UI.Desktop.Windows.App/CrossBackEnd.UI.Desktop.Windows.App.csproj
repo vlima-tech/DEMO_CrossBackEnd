@@ -8,11 +8,12 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>CrossBackEnd.UI.Desktop.Windows.App</RootNamespace>
     <AssemblyName>CrossBackEnd.UI.Desktop.Windows.App</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,15 +34,20 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>CrossBackEnd.UI.Desktop.Windows.App.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SimpleInjector, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\SimpleInjector.4.0.12\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\System.ComponentModel.Annotations.4.4.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -54,11 +60,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Views\GeoLocation\ListCountriesWindow.xaml.cs">
-      <DependentUpon>ListCountriesWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\GeoLocation\SaveCountryWindow.xaml.cs">
-      <DependentUpon>SaveCountryWindow.xaml</DependentUpon>
+    <Compile Include="Views\GeoLocation\CountryManagerWindow.xaml.cs">
+      <DependentUpon>CountryManagerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\_MainWindow.xaml.cs">
       <DependentUpon>_MainWindow.xaml</DependentUpon>
@@ -67,11 +70,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\GeoLocation\ListCountriesWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\GeoLocation\SaveCountryWindow.xaml">
+    <Page Include="Views\GeoLocation\CountryManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,6 +97,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -106,6 +106,27 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\2_Domain\2.1_Shared\CrossBackEnd.Shared.Kernel.Core\CrossBackEnd.Shared.Kernel.Core.csproj">
+      <Project>{24924ee1-1bc7-4e4e-a16b-1ec45ae93bcf}</Project>
+      <Name>CrossBackEnd.Shared.Kernel.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\2_Domain\2.3_GeoLocation\CrossBackEnd.GeoLocation.Application\CrossBackEnd.GeoLocation.Application.csproj">
+      <Project>{70f13f95-0c85-4f2b-bd11-07dd70d88419}</Project>
+      <Name>CrossBackEnd.GeoLocation.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.Abstractions\CrossBackEnd.CrossPlatform.Abstractions.csproj">
+      <Project>{c9c80c4a-6031-4eb2-8e9f-9460a2665f93}</Project>
+      <Name>CrossBackEnd.CrossPlatform.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.Core\CrossBackEnd.CrossPlatform.Core.csproj">
+      <Project>{8febc159-bc08-468a-9dbc-e47e4a3ef1b6}</Project>
+      <Name>CrossBackEnd.CrossPlatform.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrossBackEnd.UI.Desktop.Windows.IoC\CrossBackEnd.UI.Desktop.Windows.IoC.csproj">
+      <Project>{e2c87505-151b-4fda-84b5-1dfa2cb2702a}</Project>
+      <Name>CrossBackEnd.UI.Desktop.Windows.IoC</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
