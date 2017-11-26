@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="MVVM\RelayCommand.cs~RFa5f4728.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\2_Domain\2.1_Shared\CrossBackEnd.Shared.Kernel.Core\CrossBackEnd.Shared.Kernel.Core.csproj" />
     <ProjectReference Include="..\..\..\2_Domain\2.3_GeoLocation\CrossBackEnd.GeoLocation.Application\CrossBackEnd.GeoLocation.Application.csproj" />
     <ProjectReference Include="..\CrossBackEnd.CrossPlatform.Abstractions\CrossBackEnd.CrossPlatform.Abstractions.csproj" />

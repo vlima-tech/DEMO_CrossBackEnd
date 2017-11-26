@@ -11,14 +11,27 @@
             <ColumnDefinition Width="40*"/>
             <ColumnDefinition Width="60*"/>
         </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="10" Orientation="Vertical">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Buscar:" Grid.Column="0"/>
+                <TextBox x:Name="txtSearch" Grid.Column="1"/>
+                <Button Content="Buscar" Grid.Column="2" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=txtSearch, Path=Text}"/>
+            </Grid>
+            <ListBox/>
+        </StackPanel>
         <StackPanel Grid.Column="1" Margin="10">
             <Label Content="Country Name:"/>
             <TextBox Text="{Binding CountryViewModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="Abbreviation:"/>
             <TextBox Text="{Binding CountryViewModel.Abbreviation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="70" HorizontalAlignment="Left"/>
             <StackPanel Orientation="Horizontal" Height="30" HorizontalAlignment="Center">
-                <Button Content="Save" Width="70" Margin="0,0,50,0" Background="Green" Foreground="White"/>
-                <Button Content="Delete" Width="50" Background="DarkRed" Foreground="White"/>
+                <Button Content="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding Path=CountryViewModel}" Width="70" Margin="0,0,50,0" Background="Green" Foreground="White"/>
+                <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=CountryViewModel.CountryId}" Width="50" Background="DarkRed" Foreground="White"/>
             </StackPanel>
         </StackPanel>
     </Grid>

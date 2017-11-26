@@ -3,6 +3,7 @@ using System.Windows;
 
 using CrossBackEnd.CrossPlatform.Abstractions.Controllers.GeoLocation;
 using CrossBackEnd.CrossPlatform.Core.Controllers;
+using CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation;
 
 namespace CrossBackEnd.UI.Desktop.Windows.App.Views.GeoLocation
 {
@@ -20,7 +21,6 @@ namespace CrossBackEnd.UI.Desktop.Windows.App.Views.GeoLocation
             this._countryManagerController = App.Container.GetInstance<ICountryManagerController>();
 
             base.DataContext = this._countryManagerController;
-
         }
     }
 }
