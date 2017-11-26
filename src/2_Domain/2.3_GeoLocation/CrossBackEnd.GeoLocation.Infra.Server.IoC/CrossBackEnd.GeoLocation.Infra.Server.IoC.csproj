@@ -1,7 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\2.1_Shared\CrossBackEnd.Shared.Kernel.Core\CrossBackEnd.Shared.Kernel.Core.csproj" />
+    <ProjectReference Include="..\CrossBackEnd.GeoLocation.Application\CrossBackEnd.GeoLocation.Application.csproj" />
+    <ProjectReference Include="..\CrossBackEnd.GeoLocation.Domain\CrossBackEnd.GeoLocation.Domain.csproj" />
+    <ProjectReference Include="..\CrossBackEnd.GeoLocation.Infra.Server.Data\CrossBackEnd.GeoLocation.Infra.Server.Data.csproj" />
+  </ItemGroup>
 
 </Project>

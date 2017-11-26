@@ -4,17 +4,22 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 
 using CrossBackEnd.GeoLocation.Domain.Models;
+using CrossBackEnd.GeoLocation.Infra.Server.Data.Mapping;
 
 namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Context
 {
     public class GeoLocation_Context : DbContext
     {
-        public DbSet<Country> Coutries { get; set; }
+        public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<City> Cities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new CountryMap());
+            modelBuilder.ApplyConfiguration(new StateMap());
+            modelBuilder.ApplyConfiguration(new CityMap());
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -28,6 +33,7 @@ namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Context
 
             // define the database to use
             optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+            //optionsBuilder.UseSqlServer(config.GetConnectionString("VW_Connection"));
         }
     }
 }

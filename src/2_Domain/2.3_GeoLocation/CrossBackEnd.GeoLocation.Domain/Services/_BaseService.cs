@@ -6,10 +6,11 @@ using CrossBackEnd.Shared.Kernel.Core.Interfaces.Services;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
 
 namespace CrossBackEnd.GeoLocation.Domain.Services
 {
-    public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
+    public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : IModel
     {
         private readonly IBaseRepository<TEntity> _baseRepository;
 

@@ -25,6 +25,7 @@ namespace CrossBackEnd.GeoLocation.Domain.Services
 
             cities.ReturnResult.AddRange(
                 this._cityRepository.Find(IdentifyCitySpec.IdentifyCity(text), true, false)
+                    .ReturnResult
                     .OrderBy(c => c.Name)
             );
 

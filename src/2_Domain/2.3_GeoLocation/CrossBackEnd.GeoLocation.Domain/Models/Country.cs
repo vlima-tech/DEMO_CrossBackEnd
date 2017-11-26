@@ -43,7 +43,7 @@ namespace CrossBackEnd.GeoLocation.Domain.Models
 
         #region Factories
 
-        public Country CreateNew(Guid idCoutry, string name)
+        public static Country CreateNew(Guid idCoutry, string name, string abbreviation)
         {
             Country country = new Country
             {
@@ -53,17 +53,7 @@ namespace CrossBackEnd.GeoLocation.Domain.Models
 
             return country;
         }
-
-        public Country CreateNew(string name)
-        {
-            Country country = new Country
-            {
-                Name = name
-            };
-
-            return country;
-        }
-
+        
         #endregion
 
         public void Dispose()

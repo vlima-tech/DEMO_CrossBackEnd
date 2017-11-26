@@ -5,6 +5,7 @@ namespace CrossBackEnd.Shared.Kernel.Core.ValueObjects
 {
     public class Message
     {
+        public Guid MessageId { get; private set; }
         public string Value { get; private set; }
         public DateTime Time { get; private set; }
 
@@ -12,6 +13,7 @@ namespace CrossBackEnd.Shared.Kernel.Core.ValueObjects
 
         public Message(string message)
         {
+            this.MessageId = Guid.NewGuid();
             this.Value = Value;
             this.Time = DateTime.Now;
         }

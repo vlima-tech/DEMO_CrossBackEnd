@@ -14,5 +14,6 @@ namespace CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections
         void ForEach(Action<T> action);
         void ForEach(Func<T, bool> match, Action<T> action);
         bool Contains(Func<T, bool> predicade);
+        //TDestination ConvertTo<TDestination>(T source, Action<T> converter) where TDestination : class;
     }
 }

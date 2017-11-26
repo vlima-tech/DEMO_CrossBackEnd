@@ -1,17 +1,19 @@
 ﻿
-using CrossBackEnd.GeoLocation.Infra.Server.Data.Context;
-using CrossBackEnd.Shared.Kernel.Core.Collections;
-using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
-using CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories;
-using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 
+using CrossBackEnd.GeoLocation.Infra.Server.Data.Context;
+using CrossBackEnd.Shared.Kernel.Core.Collections;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories;
+using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
+
 namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, IModel
     {
         private readonly GeoLocation_Context _baseRepository;
 
@@ -22,20 +24,30 @@ namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
         {
             ExecutionResult<bool> execResult = new ExecutionResult<bool>();
             int result;
-
-            this._baseRepository.Set<TEntity>().Add(obj);
-
+            
             try
             {
+                this._baseRepository.Set<TEntity>().Add(obj);
+
                 result = this._baseRepository.SaveChanges();
 
-                if (result < 0)
-                    execResult.Errors.Add(new Message("As informações não foram salvas e erros não foram retornados."));
+                if (result > 0)
+                    execResult.DefineResult(true);
+                else
+                {
+                    execResult.DefineResult(false);
+
+                    execResult.Errors.Add(
+                        new Message("As informações não foram salvas e erros não foram retornados.")
+                    );
+                }
             }
             catch(Exception e)
             {
                 execResult.SystemErrors.Add(
-                    new Message(string.Format("Erro ao salvar a Entidade {0}:{1}", obj.ToString(), e.Message.ToString()))
+                    new Message(
+                        string.Format("Erro ao salvar a Entidade {0}:{1}", obj.ToString(), e.Message.ToString())
+                    )
                 );
             }
             
@@ -45,11 +57,11 @@ namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
         public ExecutionResult AddRange(TEntity[] array)
         {
             ExecutionResult execResult = new ExecutionResult();
-
-            this._baseRepository.Set<TEntity>().AddRange(array);
-
+            
             try
             {
+                this._baseRepository.Set<TEntity>().AddRange(array);
+
                 this._baseRepository.SaveChanges();
             }
             catch(Exception e)
@@ -68,80 +80,209 @@ namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
             return execResult;
         }
         
-        public ExecutionResult<IBaseCollection<TEntity>> GetAll()
+        public ExecutionResult<bool> Update(TEntity obj)
         {
-            ExecutionResult<IBaseCollection<TEntity>> execResult = new ExecutionResult<IBaseCollection<TEntity>>();
+            var execResult = new ExecutionResult<bool>();
 
-            execResult.ReturnResult.AddRange(
-                this._baseRepository.Set<TEntity>()
-                    .ToList()
-            );
+            try
+            {
+                var result = this._baseRepository.Set<TEntity>().Update(obj);
 
+                if (result.State.Equals(EntityState.Modified))
+                    execResult.DefineResult(true);
+                else
+                    execResult.DefineResult(false);
+            }
+            catch(Exception e)
+            {
+                execResult.SystemErrors.Add(new Message(""));
+            }
+            
             return execResult;
         }
         
         public ExecutionResult<bool> Remove(Guid id)
         {
-            ExecutionResult<bool> exectResult = new ExecutionResult<bool>();
+            ExecutionResult<bool> execResult = new ExecutionResult<bool>();
 
-            var result = this._baseRepository.Set<TEntity>()
-                .Remove(
-                    this._baseRepository.Set<TEntity>().Find(id)
-                );
-
-            if (!result.State.Equals(EntityState.Deleted))
+            try
             {
-                exectResult.Errors.Add(
-                    new Message(string.Format("", 0))
-                );
+                var result = this._baseRepository.Set<TEntity>()
+                    .Remove(
+                        this._baseRepository.Set<TEntity>().Find(id)
+                    );
+
+                if (!result.State.Equals(EntityState.Deleted))
+                {
+                    execResult.DefineResult(false);
+
+                    execResult.Errors.Add(
+                        new Message(string.Format("", 0))
+                    );
+                }
+                else
+                    execResult.DefineResult(true);
+            }
+            catch (Exception e)
+            {
+                execResult.SystemErrors.Add(new Message(""));
             }
 
-            return exectResult;
+            return execResult;
         }
-
-        public bool Update(TEntity obj)
+        
+        public ExecutionResult<bool> Exists(Guid id)
         {
-            var result = this._baseRepository.Set<TEntity>().Update(obj);
+            var execResult = new ExecutionResult<bool>();
 
-            if (result.State.Equals(EntityState.Modified))
-                return true;
-            else
-                return false;
-        }
-
-        public IBaseCollection<TEntity> Find(Expression<Func<TEntity, bool>> predicate, bool tracking)
-        {
-            var result = new BaseCollection<TEntity>();
-
-            if (tracking)
+            try
             {
-                result.AddRange(
+                var result = this._baseRepository.Set<TEntity>().Find(id);
+
+                if (result != null)
+                    execResult.DefineResult(true);
+                else
+                {
+                    execResult.DefineResult(false);
+                    execResult.Errors.Add(new Message(""));
+                }
+            }
+            catch(Exception e)
+            {
+                execResult.DefineResult(false);
+                execResult.SystemErrors.Add(new Message(""));
+            }
+
+
+            return execResult;
+        }
+
+        public ExecutionResult<bool> Exists(TEntity item)
+        {
+            var execResult = new ExecutionResult<bool>();
+
+            try
+            {
+                var result = this._baseRepository.Set<TEntity>().Find(item);
+
+                if (result != null)
+                    execResult.DefineResult(true);
+                else
+                {
+                    execResult.DefineResult(false);
+                    execResult.Errors.Add(new Message(""));
+                }
+            }
+            catch (Exception e)
+            {
+                execResult.DefineResult(false);
+                execResult.SystemErrors.Add(new Message(""));
+            }
+
+
+            return execResult;
+        }
+
+        public ExecutionResult<TEntity> SearchById(Guid id)
+        {
+            var execResult = new ExecutionResult<TEntity>();
+
+            try
+            {
+                var result = this._baseRepository.Set<TEntity>().Find(id);
+
+                if (result != null)
+                    execResult.DefineResult(result);
+                else
+                {
+                    execResult.DefineResult(null);
+                    execResult.Errors.Add(new Message(""));
+                }
+            }
+            catch (Exception e)
+            {
+                execResult.DefineResult(null);
+                execResult.SystemErrors.Add(new Message(""));
+            }
+
+
+            return execResult;
+        }
+
+        public ExecutionResult<IBaseCollection<TEntity>> GetAll()
+        {
+            var execResult = new ExecutionResult<IBaseCollection<TEntity>>();
+            
+            execResult.DefineResult(
+                new BaseCollection<TEntity>(
                     this._baseRepository.Set<TEntity>()
-                        .Where(predicate)
-                );
-            }
-            else
-            {
-                result.AddRange(
-                    this._baseRepository.Set<TEntity>()
-                        .AsNoTracking()
-                        .Where(predicate)
-                );
-            }
+                        .ToList()
+                )
+            );
 
-            return result;
+            return execResult;
         }
 
-        public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate, bool tracking)
+        public ExecutionResult<IBaseCollection<TEntity>> Find(Expression<Func<TEntity, bool>> predicate, bool tracking)
         {
-            if (tracking)
-                return this._baseRepository.Set<TEntity>().Where(predicate);
-            else
+            var execResult = new ExecutionResult<IBaseCollection<TEntity>>();
+
+            try
             {
-                return this._baseRepository.Set<TEntity>()
-                    .AsNoTracking()
-                    .Where(predicate);
+                if (tracking)
+                {
+                    execResult.DefineResult(
+                        new BaseCollection<TEntity>(
+                            this._baseRepository.Set<TEntity>()
+                                .Where(predicate)
+                        )
+                    );
+                }
+                else
+                {
+                    execResult.DefineResult(
+                        new BaseCollection<TEntity>(
+                            this._baseRepository.Set<TEntity>()
+                                .AsNoTracking()
+                                .Where(predicate)
+                        )
+                    );
+                }
             }
+            catch (Exception e)
+            {
+                execResult.SystemErrors.Add(new Message(""));
+            }
+            return execResult;
+        }
+
+        public ExecutionResult<IQueryable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate, bool tracking)
+        {
+            var execResult = new ExecutionResult<IQueryable<TEntity>>();
+
+            try
+            {
+                if (tracking)
+                {
+                    execResult.DefineResult(
+                        this._baseRepository.Set<TEntity>().Where(predicate)
+                    );
+                }
+                else
+                {
+                    execResult.DefineResult(
+                        this._baseRepository.Set<TEntity>()
+                            .AsNoTracking()
+                            .Where(predicate)
+                    );
+                }
+            }
+            catch (Exception e)
+            {
+                execResult.SystemErrors.Add(new Message(""));
+            }
+
+            return execResult;
         }
 
         public void Dispose()

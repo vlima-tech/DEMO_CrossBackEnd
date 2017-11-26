@@ -1,21 +1,35 @@
 ﻿
 using System;
-using System.Linq.Expressions;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces.MVVM;
 
 namespace CrossBackEnd.Shared.Kernel.Core.Interfaces.AppServices
 {
-    public interface IBaseAppService<TEntity> : IDisposable where TEntity : class
+    /*
+    public interface IBaseAppService<TViewModel> : IDisposable where TViewModel : BaseViewModel<TViewModel>
     {
-        ExecutionResult<bool> Add(TEntity obj);
-        ExecutionResult AddRange(TEntity[] array);
-        ExecutionResult<bool> Update(TEntity obj);
+        ExecutionResult<bool> Add(TViewModel obj);
+        ExecutionResult AddRange(TViewModel[] array);
+        ExecutionResult<bool> Update(TViewModel obj);
         ExecutionResult<bool> Remove(Guid id);
         ExecutionResult<bool> Exists(Guid id);
-        ExecutionResult<bool> Exists(TEntity item);
-        ExecutionResult<TEntity> SearchById(Guid id);
-        ExecutionResult<IBaseCollection<TEntity>> GetAll();
-        ExecutionResult<IBaseCollection<TEntity>> Find(Expression<Func<TEntity, bool>> predicate, bool tracking);
+        ExecutionResult<bool> Exists(TViewModel item);
+        ExecutionResult<TViewModel> SearchById(Guid id);
+        ExecutionResult<IBaseCollection<TViewModel>> GetAll();
+        ExecutionResult<IBaseCollection<TViewModel>> Find(Expression<Func<TViewModel, bool>> predicate, bool tracking);
+    }
+    */
+
+    public interface IBaseAppService<TViewModel> : IDisposable where TViewModel : IBaseViewModel
+    {
+        ExecutionResult<bool> Add(TViewModel obj);
+        ExecutionResult AddRange(TViewModel[] array);
+        ExecutionResult<bool> Update(TViewModel obj);
+        ExecutionResult<bool> Remove(Guid id);
+        ExecutionResult<bool> Exists(Guid id);
+        ExecutionResult<bool> Exists(TViewModel item);
+        ExecutionResult<TViewModel> SearchById(Guid id);
+        ExecutionResult<IBaseCollection<TViewModel>> GetAll();
     }
 }
