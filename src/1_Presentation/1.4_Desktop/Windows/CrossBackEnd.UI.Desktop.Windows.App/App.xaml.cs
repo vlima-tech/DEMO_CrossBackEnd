@@ -3,6 +3,8 @@ using System;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 
+using AutoMapper;
+
 using CrossBackEnd.GeoLocation.Infra.Client.IoC;
 using CrossBackEnd.CrossPlatform.Infra.IoC;
 
@@ -28,6 +30,8 @@ namespace CrossBackEnd.UI.Desktop.Windows.App
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper();
+
             services.AddCrossPlatform();
             services.AddGeoLocation();
 

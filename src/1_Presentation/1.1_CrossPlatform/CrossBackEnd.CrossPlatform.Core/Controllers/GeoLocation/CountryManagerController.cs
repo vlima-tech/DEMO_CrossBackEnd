@@ -15,9 +15,12 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
         public ICommand SaveCommand { get; private set; }
         public ICommand SearchCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
+        private readonly ICountryAppService _coutryAppService;
         
-        public CountryManagerController()
+        public CountryManagerController(ICountryAppService countryAppService)
         {
+            this._coutryAppService = countryAppService;
+
             this.CountryViewModel = new CountryViewModel
             {
                 Name = "Argentina",
