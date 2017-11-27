@@ -5,6 +5,7 @@ using CrossBackEnd.CrossPlatform.Abstractions.Controllers;
 using CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation;
 using CrossBackEnd.CrossPlatform.Abstractions.Controllers.GeoLocation;
 using CrossBackEnd.CrossPlatform.Core.Controllers;
+using SimpleInjector.Lifestyles;
 
 namespace CrossBackEnd.UI.Desktop.Windows.IoC
 {

@@ -5,10 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.1" />
     <PackageReference Include="SimpleInjector" Version="4.0.12" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\2_Domain\2.3_GeoLocation\CrossBackEnd.GeoLocation.Application\CrossBackEnd.GeoLocation.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\2_Domain\2.3_GeoLocation\CrossBackEnd.GeoLocation.Domain\CrossBackEnd.GeoLocation.Domain.csproj" />
     <ProjectReference Include="..\..\..\..\2_Domain\2.3_GeoLocation\CrossBackEnd.GeoLocation.Infra.Client.Data\CrossBackEnd.GeoLocation.Infra.Client.Data.csproj" />
     <ProjectReference Include="..\..\..\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.Abstractions\CrossBackEnd.CrossPlatform.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.Core\CrossBackEnd.CrossPlatform.Core.csproj" />

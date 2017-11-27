@@ -5,6 +5,7 @@ using System.Windows;
 using CrossBackEnd.UI.Desktop.Windows.IoC;
 using CrossBackEnd.UI.Desktop.Windows.App.Views;
 using CrossBackEnd.UI.Desktop.Windows.App.Views.GeoLocation;
+using SimpleInjector.Lifestyles;
 
 namespace CrossBackEnd.UI.Desktop.Windows.App
 {
@@ -26,7 +27,7 @@ namespace CrossBackEnd.UI.Desktop.Windows.App
             Container.Register<CountryManagerWindow>();
             
             Container.AddCrossPlatform();
-            Container.AddGeoLocation();
+           // Container.AddGeoLocation();
 
             Container.Verify();
 

@@ -31,14 +31,14 @@ namespace CrossBackEnd.UI.Web.REST.API.Controllers.GeoLocation
         {
             return Json(this._countryAppService.SearchById(id));
         }
-        
-        // POST: api/Country
+
+        // POST: api/GeoLocation/Country
         [HttpPost]
         public void Post([FromBody]string value)
         {
         }
-        
-        // PUT: api/Country/5
+
+        // PUT: api/GeoLocation/Country/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
