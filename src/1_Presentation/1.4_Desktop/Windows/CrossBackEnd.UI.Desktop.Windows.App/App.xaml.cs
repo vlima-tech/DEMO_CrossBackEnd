@@ -1,11 +1,10 @@
 ﻿
-using SimpleInjector;
+using System;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 
-using CrossBackEnd.UI.Desktop.Windows.IoC;
-using CrossBackEnd.UI.Desktop.Windows.App.Views;
-using CrossBackEnd.UI.Desktop.Windows.App.Views.GeoLocation;
-using SimpleInjector.Lifestyles;
+using CrossBackEnd.GeoLocation.Infra.Client.IoC;
+using CrossBackEnd.CrossPlatform.Infra.IoC;
 
 namespace CrossBackEnd.UI.Desktop.Windows.App
 {
@@ -14,24 +13,25 @@ namespace CrossBackEnd.UI.Desktop.Windows.App
     /// </summary>
     public partial class App : Application
     {
-        public static Container Container { get; private set; }
+      //  public static Container Container { get; private set; }
+
+        private IServiceCollection _services { get; set; }
+        public static IServiceProvider Container { get; private set; }
 
         public App()
         {
-            Container = new Container();
+            //Container = new Container();
+            this._services = new ServiceCollection();
+
+            ConfigureServices(this._services);
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        public void ConfigureServices(IServiceCollection services)
         {
-            Container.Register<_MainWindow>();
-            Container.Register<CountryManagerWindow>();
-            
-            Container.AddCrossPlatform();
-           // Container.AddGeoLocation();
+            services.AddCrossPlatform();
+            services.AddGeoLocation();
 
-            Container.Verify();
-
-            base.OnStartup(e);
+            Container = services.BuildServiceProvider();
         }
     }
 }

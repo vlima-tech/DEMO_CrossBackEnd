@@ -9,4 +9,10 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CrossBackEnd.GeoLocation.Application\CrossBackEnd.GeoLocation.Application.csproj" />
+    <ProjectReference Include="..\CrossBackEnd.GeoLocation.Domain\CrossBackEnd.GeoLocation.Domain.csproj" />
+    <ProjectReference Include="..\CrossBackEnd.GeoLocation.Infra.Client.Data\CrossBackEnd.GeoLocation.Infra.Client.Data.csproj" />
+  </ItemGroup>
+
 </Project>

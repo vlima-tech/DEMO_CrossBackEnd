@@ -23,7 +23,7 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
                 Name = "Argentina",
                 Abbreviation = "ARG"
             };
-
+            
             this.SaveCommand = new Command(SaveCountryCommand);
             this.SearchCommand = new Command(SearchCountryCommand);
             this.DeleteCommand = new Command(DeleCountryCommand);

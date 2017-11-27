@@ -14,6 +14,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -41,17 +43,16 @@
     <Reference Include="AutoMapper, Version=6.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\packages\AutoMapper.6.2.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\packages\SimpleInjector.4.0.12\lib\net45\SimpleInjector.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="System.ComponentModel.Annotations">
       <HintPath>..\..\..\..\..\packages\System.ComponentModel.Annotations.4.4.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -119,6 +120,14 @@
       <Project>{70f13f95-0c85-4f2b-bd11-07dd70d88419}</Project>
       <Name>CrossBackEnd.GeoLocation.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\2_Domain\2.3_GeoLocation\CrossBackEnd.GeoLocation.Domain\CrossBackEnd.GeoLocation.Domain.csproj">
+      <Project>{04f826dc-1524-4070-a03c-ea267d293961}</Project>
+      <Name>CrossBackEnd.GeoLocation.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\2_Domain\2.3_GeoLocation\CrossBackEnd.GeoLocation.Infra.Client.IoC\CrossBackEnd.GeoLocation.Infra.Client.IoC.csproj">
+      <Project>{cfd1f652-c0e8-4bbb-9f33-26616adf1f8b}</Project>
+      <Name>CrossBackEnd.GeoLocation.Infra.Client.IoC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.Abstractions\CrossBackEnd.CrossPlatform.Abstractions.csproj">
       <Project>{c9c80c4a-6031-4eb2-8e9f-9460a2665f93}</Project>
       <Name>CrossBackEnd.CrossPlatform.Abstractions</Name>
@@ -127,10 +136,17 @@
       <Project>{8febc159-bc08-468a-9dbc-e47e4a3ef1b6}</Project>
       <Name>CrossBackEnd.CrossPlatform.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CrossBackEnd.UI.Desktop.Windows.IoC\CrossBackEnd.UI.Desktop.Windows.IoC.csproj">
-      <Project>{e2c87505-151b-4fda-84b5-1dfa2cb2702a}</Project>
-      <Name>CrossBackEnd.UI.Desktop.Windows.IoC</Name>
+    <ProjectReference Include="..\..\..\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.Infra.IoC\CrossBackEnd.CrossPlatform.Infra.IoC.csproj">
+      <Project>{6bdebc1d-7f53-451d-b149-44b087b9a0c4}</Project>
+      <Name>CrossBackEnd.CrossPlatform.Infra.IoC</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\..\..\..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\..\..\..\..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\..\..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
 </Project>
