@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{E4613F6B-F746-48F4-8185-B5795491DEB9}"
 EndProject
@@ -65,9 +65,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossBackEnd.CrossPlatform.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossBackEnd.CrossPlatform.Abstractions", "src\1_Presentation\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.Abstractions\CrossBackEnd.CrossPlatform.Abstractions.csproj", "{C9C80C4A-6031-4EB2-8E9F-9460A2665F93}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossBackEnd.UI.Desktop.Windows.IoC", "src\1_Presentation\1.4_Desktop\Windows\CrossBackEnd.UI.Desktop.Windows.IoC\CrossBackEnd.UI.Desktop.Windows.IoC.csproj", "{E2C87505-151B-4FDA-84B5-1DFA2CB2702A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossBackEnd.CrossPlatform.Infra.IoC", "src\1_Presentation\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.Infra.IoC\CrossBackEnd.CrossPlatform.Infra.IoC.csproj", "{6BDEBC1D-7F53-451D-B149-44B087B9A0C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossBackEnd.CrossPlatform.Infra.IoC", "src\1_Presentation\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.Infra.IoC\CrossBackEnd.CrossPlatform.Infra.IoC.csproj", "{6BDEBC1D-7F53-451D-B149-44B087B9A0C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossBackEnd.UI.Mobile.Android", "src\1_Presentation\1.3_Mobile\Android\CrossBackEnd.UI.Mobile.Android\CrossBackEnd.UI.Mobile.Android.csproj", "{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossBackEnd.CrossPlatform.UI", "src\1_Presentation\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.UI\CrossBackEnd.CrossPlatform.UI.csproj", "{AB082E65-8A6C-44DB-83C1-3D8DB191817D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,14 +121,20 @@ Global
 		{C9C80C4A-6031-4EB2-8E9F-9460A2665F93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9C80C4A-6031-4EB2-8E9F-9460A2665F93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9C80C4A-6031-4EB2-8E9F-9460A2665F93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2C87505-151B-4FDA-84B5-1DFA2CB2702A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2C87505-151B-4FDA-84B5-1DFA2CB2702A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2C87505-151B-4FDA-84B5-1DFA2CB2702A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2C87505-151B-4FDA-84B5-1DFA2CB2702A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6BDEBC1D-7F53-451D-B149-44B087B9A0C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6BDEBC1D-7F53-451D-B149-44B087B9A0C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BDEBC1D-7F53-451D-B149-44B087B9A0C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BDEBC1D-7F53-451D-B149-44B087B9A0C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AB082E65-8A6C-44DB-83C1-3D8DB191817D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB082E65-8A6C-44DB-83C1-3D8DB191817D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB082E65-8A6C-44DB-83C1-3D8DB191817D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB082E65-8A6C-44DB-83C1-3D8DB191817D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -161,8 +169,9 @@ Global
 		{9C1C470F-9BB1-45DB-B7AC-9C59683421BC} = {7B037DDD-604E-48CD-B38F-6B82276F2A7C}
 		{8FEBC159-BC08-468A-9DBC-E47E4A3EF1B6} = {330C1304-1D2E-4307-AA91-A67ABE23F633}
 		{C9C80C4A-6031-4EB2-8E9F-9460A2665F93} = {330C1304-1D2E-4307-AA91-A67ABE23F633}
-		{E2C87505-151B-4FDA-84B5-1DFA2CB2702A} = {7B037DDD-604E-48CD-B38F-6B82276F2A7C}
 		{6BDEBC1D-7F53-451D-B149-44B087B9A0C4} = {330C1304-1D2E-4307-AA91-A67ABE23F633}
+		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA} = {C127C5FF-8B7A-47A8-867E-C7E945C274F8}
+		{AB082E65-8A6C-44DB-83C1-3D8DB191817D} = {330C1304-1D2E-4307-AA91-A67ABE23F633}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A24C6C6-6FC7-4C7A-A817-0386FC7E7C5A}

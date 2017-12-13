@@ -36,7 +36,7 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
         {
             if(countryViewModel is CountryViewModel)
             {
-
+                
             }
             else
             {
@@ -53,7 +53,7 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
         {
             if(countryId is Guid)
             {
-
+                
             }
             else
             {
