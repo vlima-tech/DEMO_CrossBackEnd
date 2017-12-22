@@ -67,9 +67,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossBackEnd.CrossPlatform.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossBackEnd.CrossPlatform.Infra.IoC", "src\1_Presentation\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.Infra.IoC\CrossBackEnd.CrossPlatform.Infra.IoC.csproj", "{6BDEBC1D-7F53-451D-B149-44B087B9A0C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossBackEnd.UI.Mobile.Android", "src\1_Presentation\1.3_Mobile\Android\CrossBackEnd.UI.Mobile.Android\CrossBackEnd.UI.Mobile.Android.csproj", "{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossBackEnd.CrossPlatform.UI", "src\1_Presentation\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.UI\CrossBackEnd.CrossPlatform.UI.csproj", "{AB082E65-8A6C-44DB-83C1-3D8DB191817D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossBackEnd.CrossPlatform.UI", "src\1_Presentation\1.1_CrossPlatform\CrossBackEnd.CrossPlatform.UI\CrossBackEnd.CrossPlatform.UI.csproj", "{AB082E65-8A6C-44DB-83C1-3D8DB191817D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossBackEnd.UI.Mobile.Android", "src\1_Presentation\1.3_Mobile\Android\CrossBackEnd.UI.Mobile.Android\CrossBackEnd.UI.Mobile.Android.csproj", "{661E4BA3-F4C3-4F69-85BC-B4F5AFB91FB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,16 +125,16 @@ Global
 		{6BDEBC1D-7F53-451D-B149-44B087B9A0C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BDEBC1D-7F53-451D-B149-44B087B9A0C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BDEBC1D-7F53-451D-B149-44B087B9A0C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{AB082E65-8A6C-44DB-83C1-3D8DB191817D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB082E65-8A6C-44DB-83C1-3D8DB191817D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB082E65-8A6C-44DB-83C1-3D8DB191817D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB082E65-8A6C-44DB-83C1-3D8DB191817D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{661E4BA3-F4C3-4F69-85BC-B4F5AFB91FB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{661E4BA3-F4C3-4F69-85BC-B4F5AFB91FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{661E4BA3-F4C3-4F69-85BC-B4F5AFB91FB8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{661E4BA3-F4C3-4F69-85BC-B4F5AFB91FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{661E4BA3-F4C3-4F69-85BC-B4F5AFB91FB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{661E4BA3-F4C3-4F69-85BC-B4F5AFB91FB8}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -170,8 +170,8 @@ Global
 		{8FEBC159-BC08-468A-9DBC-E47E4A3EF1B6} = {330C1304-1D2E-4307-AA91-A67ABE23F633}
 		{C9C80C4A-6031-4EB2-8E9F-9460A2665F93} = {330C1304-1D2E-4307-AA91-A67ABE23F633}
 		{6BDEBC1D-7F53-451D-B149-44B087B9A0C4} = {330C1304-1D2E-4307-AA91-A67ABE23F633}
-		{5B837CDC-6EE7-4BD6-BD13-726078B81CFA} = {C127C5FF-8B7A-47A8-867E-C7E945C274F8}
 		{AB082E65-8A6C-44DB-83C1-3D8DB191817D} = {330C1304-1D2E-4307-AA91-A67ABE23F633}
+		{661E4BA3-F4C3-4F69-85BC-B4F5AFB91FB8} = {C127C5FF-8B7A-47A8-867E-C7E945C274F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A24C6C6-6FC7-4C7A-A817-0386FC7E7C5A}

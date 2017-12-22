@@ -16,6 +16,7 @@ namespace CrossBackEnd.CrossPlatform.UI
             switch (Device.RuntimePlatform)
             {
                 case Device.Android:
+                    //MainPage = new HomePage();
                     MainPage = new AndroidRootPage();
                     break;
 

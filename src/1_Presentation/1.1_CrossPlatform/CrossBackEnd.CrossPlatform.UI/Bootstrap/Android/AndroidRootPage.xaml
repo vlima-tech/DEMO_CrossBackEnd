@@ -11,7 +11,7 @@
     
     <!-- Menu -->
     <MasterDetailPage.Master>
-        <menu:MainMenuPage />
+        <menu:MainMenuPage x:Name="MasterPage"/>
     </MasterDetailPage.Master>
 
     <!-- Main Body -->

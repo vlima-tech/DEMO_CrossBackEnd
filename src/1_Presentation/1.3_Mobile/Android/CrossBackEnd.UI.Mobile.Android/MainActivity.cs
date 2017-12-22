@@ -1,16 +1,16 @@
 ﻿
 using Android.App;
-using Android.OS;
 using Android.Content.PM;
+using Android.OS;
 
 using CrossBackEnd.CrossPlatform.UI;
 
-namespace CrossBackEnd.UI.Mobile.Android
+namespace CrossBackEnd.UI.Mobile.Droid
 {
     [Activity(
-        Label = "DEMO CrossBackEnd", 
+        Label = "DEMO_CrossBackEnd", 
         Icon = "@drawable/icon", 
-        Theme = "@style/MyTheme", 
+        Theme = "@style/MainTheme", 
         MainLauncher = true, 
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation
     )]
@@ -24,7 +24,6 @@ namespace CrossBackEnd.UI.Mobile.Android
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-
             LoadApplication(new App());
         }
     }

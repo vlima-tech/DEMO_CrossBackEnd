@@ -1,8 +1,10 @@
 ﻿
 using CrossBackEnd.CrossPlatform.Abstractions.Controllers;
 using CrossBackEnd.CrossPlatform.Abstractions.Navigation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 namespace CrossBackEnd.CrossPlatform.Core.Controllers
@@ -12,6 +14,8 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers
         private string title;
         private string icon;
         private bool isBusy;
+        private bool isNotBusy;
+        
         public INavigationService Navigation { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -20,7 +24,26 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers
         public bool IsBusy
         {
             get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            set
+            {
+                this.isNotBusy = !value;
+
+                SetProperty(ref isBusy, value);
+                OnPropertyChanged(() => IsNotBusy);
+            }
+        }
+
+        public bool IsNotBusy
+        {
+            get { return isNotBusy; }
+            set
+            {
+                this.isBusy = !value;
+
+                SetProperty(ref isNotBusy, value);
+
+                OnPropertyChanged(() => IsBusy);
+            }
         }
 
         public string Icon
@@ -52,9 +75,29 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers
                 return false;
 
             storage = value;
-            //this.PropertyChanged?.Invoke()
+
+            OnPropertyChanged(propertyName);
 
             return true;
+        }
+
+        /// <summary>
+        /// Return a string name of a any property.
+        /// Use "() => Property_Name"
+        /// </summary>
+        /// <typeparam name="TValue">Your object</typeparam>
+        /// <param name="propertyName">User () => Property_Name</param>
+        /// <returns></returns>
+        protected virtual void OnPropertyChanged<TValue>(Expression<Func<TValue>> propertyName)
+        {
+            var propName = ((MemberExpression)propertyName.Body).Member.Name;
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
