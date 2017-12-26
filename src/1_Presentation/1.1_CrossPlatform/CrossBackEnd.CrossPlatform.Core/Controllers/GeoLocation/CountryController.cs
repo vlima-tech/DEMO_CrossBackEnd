@@ -1,19 +1,18 @@
 ﻿
 using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 using CrossBackEnd.CrossPlatform.Abstractions.Controllers.GeoLocation;
+using CrossBackEnd.CrossPlatform.Core.Collection;
 using CrossBackEnd.CrossPlatform.Core.MVVM;
 using CrossBackEnd.GeoLocation.Application.Interfaces;
 using CrossBackEnd.GeoLocation.Application.ViewModels;
 
 namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
 {
-    public class CountryManagerController : BaseController, ICountryManagerController
+    public class CountryController : BaseController, ICountryManagerController
     {
-        public ObservableCollection<CountryViewModel> Countries { get; private set; }
-        public CountryViewModel CountryViewModel { get; private set; }
+        public CountryCollection Countries { get; private set; }
         private string searchText = "";
         private bool countryExists = true;
         private bool countryNotExists = false;
@@ -23,7 +22,7 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
         public ICommand SearchCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
         
-        private readonly ICountryAppService _coutryAppService;
+        private readonly ICountryAppService _countryAppService;
 
         #region Gets and Sets
 
@@ -61,26 +60,25 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
 
         #endregion
 
-        public CountryManagerController(ICountryAppService countryAppService)
+        public CountryController(ICountryAppService countryAppService)
         {
-            this.Title = "Country Manager!!";
+            this.Title = "Countries";
 
-            this._coutryAppService = countryAppService;
+            this._countryAppService = countryAppService;
 
-            this.Countries = new ObservableCollection<CountryViewModel>();
+            this.Countries = new CountryCollection();
             
-            this.CountryViewModel = new CountryViewModel
-            {
-                Name = "Argentina",
-                Abbreviation = "ARG"
-            };
-
-            this.AddCommand = new Command<string>(AddCountryCommand);
-            this.SaveCommand = new Command(SaveCountryCommand);
             this.SearchCommand = new Command<string>(SearchCountryCommand);
             this.DeleteCommand = new Command(DeleCountryCommand);
 
 
+        }
+
+        private void LoadCountries()
+        {
+            var execResult = this._countryAppService.GetAll();
+
+            
         }
 
         private void AddCountryCommand(string searchText)

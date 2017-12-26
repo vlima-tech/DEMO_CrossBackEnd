@@ -14,9 +14,34 @@
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
             <SearchBar x:Name="txtSearch" Grid.Column="0" SearchCommand="{Binding SearchCommand}"/>
-            <Button Grid.Column="1" Text="+" BackgroundColor="LightGreen"/>
+            <Button Grid.Column="1" Text="+" BackgroundColor="LightGreen" IsVisible="{Binding CountryNotExists, Mode=OneWay}"/>
         </Grid>
-        <ListView/>
+        <ListView CachingStrategy="RecycleElement" IsVisible="{Binding CountryExists, Mode=OneWay}"/>
+        
+        <Grid IsVisible="{Bindig CountryNotExists, Mode=OneWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Text="Pais:" Grid.Row="1" Grid.Column="1" Style="{StaticResource StyleBaseLabel}"/>
+            <Entry Placeholder="Digite o Nome do Pais" Grid.Row="1" Grid.Column="2" Style="{StaticResource StyleBaseTextBox}"/>
+            <Label Text="Abreviatura:" Grid.Row="2" Grid.Column="1" Style="{StaticResource StyleBaseLabel}"/>
+            <Entry Placeholder="Digite a Abreviatura" Grid.Row="2" Grid.Column="2" Style="{StaticResource StyleBaseTextBox}"/>
+            <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,20,0,0">
+                <Button Text="Save" Grid.Row="4" Grid.Column="1" BackgroundColor="Green" TextColor="White"/>
+                <Button Text="Cancel" Grid.Row="4" Grid.Column="2" BackgroundColor="LightGray" TextColor="White"/>
+            </StackLayout>
+
+        </Grid>
     </StackLayout>
     
     <!--

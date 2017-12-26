@@ -6,7 +6,7 @@ using CrossBackEnd.Shared.Kernel.Core.Interfaces.MVVM;
 
 namespace CrossBackEnd.Shared.Kernel.Core.Interfaces.AppServices
 {
-    public interface IBaseAppService<TViewModel>  where TViewModel : IBaseViewModel
+    public interface IBaseAppService<TViewModel>  where TViewModel : IViewModel
     {
         ExecutionResult<bool> Add(TViewModel obj);
         ExecutionResult AddRange(TViewModel[] array);

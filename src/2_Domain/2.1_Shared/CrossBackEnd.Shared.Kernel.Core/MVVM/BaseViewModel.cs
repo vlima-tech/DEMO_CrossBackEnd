@@ -11,7 +11,7 @@ using CrossBackEnd.Shared.Kernel.Core.Collections;
 
 namespace CrossBackEnd.Shared.Kernel.Core.MVVM
 {
-    public class BaseViewModel<TViewModel> : IBaseViewModel where TViewModel : IBaseViewModel
+    public class BaseViewModel<TViewModel> : IViewModel where TViewModel : IViewModel
     {
         public IBaseCollection<ValidationResult> ValidationResult { get; private set; }
         public bool IsValid { get { return this.ValidationResult.Count.Equals(0); } }

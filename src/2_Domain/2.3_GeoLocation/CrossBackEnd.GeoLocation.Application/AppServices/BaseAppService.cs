@@ -14,7 +14,7 @@ using CrossBackEnd.Shared.Kernel.Core.Interfaces.MVVM;
 namespace CrossBackEnd.GeoLocation.Application.AppServices
 {
     public abstract class BaseAppService<TViewModel, TModel> : IBaseAppService<TViewModel>
-        where TViewModel : BaseViewModel<TViewModel>, IBaseViewModel
+        where TViewModel : BaseViewModel<TViewModel>, IViewModel
         where TModel : IModel
     {
         private readonly IBaseService<TModel> _baseService;

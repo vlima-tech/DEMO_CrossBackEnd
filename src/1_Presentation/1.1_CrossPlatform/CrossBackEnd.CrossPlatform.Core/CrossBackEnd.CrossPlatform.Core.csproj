@@ -18,8 +18,4 @@
     <ProjectReference Include="..\CrossBackEnd.CrossPlatform.Abstractions\CrossBackEnd.CrossPlatform.Abstractions.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Collection\" />
-  </ItemGroup>
-
 </Project>

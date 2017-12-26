@@ -18,7 +18,7 @@ namespace CrossBackEnd.Shared.Kernel.Core.Interfaces.MVVM
     }
     */
 
-    public interface IBaseViewModel : INotifyPropertyChanged, IDisposable
+    public interface IViewModel : INotifyPropertyChanged, IDisposable
     {
         bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null);
         IBaseCollection<ValidationResult> ValidationResult { get; }
