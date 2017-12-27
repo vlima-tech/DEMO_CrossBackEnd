@@ -1,7 +1,8 @@
 ﻿
-using CrossBackEnd.CrossPlatform.UI.Views.GeoLocation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
+using CrossBackEnd.CrossPlatform.UI.Views.GeoLocation;
 
 namespace CrossBackEnd.CrossPlatform.UI.Views._Home
 {
@@ -17,7 +18,7 @@ namespace CrossBackEnd.CrossPlatform.UI.Views._Home
 
         private void TxtCountries_Clicked(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new CountryManagerPage());
+            Navigation.PushAsync(new CountryPage());
             
         }
     }

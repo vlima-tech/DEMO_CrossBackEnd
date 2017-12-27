@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+using CrossBackEnd.CrossPlatform.Abstractions.Controllers.GeoLocation;
 
 namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
 {
-    public class CountryDetailsController
+    public class CountryDetailsController : BaseController, ICountryDetailsController
     {
     }
 }

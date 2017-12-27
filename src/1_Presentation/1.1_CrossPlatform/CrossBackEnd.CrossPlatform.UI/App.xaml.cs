@@ -6,6 +6,7 @@ using Xamarin.Forms.Xaml;
 
 using CrossBackEnd.CrossPlatform.Infra.IoC;
 using CrossBackEnd.CrossPlatform.UI.Bootstrap.Android;
+using CrossBackEnd.CrossPlatform.UI.Views._Menus;
 //using CrossBackEnd.GeoLocation.Infra.Client.IoC;
 
 namespace CrossBackEnd.CrossPlatform.UI
@@ -41,8 +42,11 @@ namespace CrossBackEnd.CrossPlatform.UI
             services.AddCrossPlatform();
             //  this._services.AddGeoLocation();
 
-            
-            
+            services.AddScoped<AndroidRootPage>();
+            services.AddScoped<MainMenuPage>();
+
+
+
             Container = this._services.BuildServiceProvider();
         }
     }

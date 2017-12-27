@@ -13,7 +13,9 @@ namespace CrossBackEnd.CrossPlatform.Infra.IoC
         public static void AddCrossPlatform(this IServiceCollection services)
         {
             services.AddScoped<IBaseController, BaseController>();
+
             services.AddScoped<ICountryController, CountryController>();
+            services.AddScoped<ICountryDetailsController, CountryDetailsController>();
         }
     }
 }

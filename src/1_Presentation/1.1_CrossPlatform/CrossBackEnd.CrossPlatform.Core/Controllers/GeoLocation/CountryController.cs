@@ -70,8 +70,6 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
             
             this.SearchCommand = new Command<string>(SearchCountryCommand);
             this.DeleteCommand = new Command(DeleCountryCommand);
-
-
         }
 
         private void LoadCountries()
