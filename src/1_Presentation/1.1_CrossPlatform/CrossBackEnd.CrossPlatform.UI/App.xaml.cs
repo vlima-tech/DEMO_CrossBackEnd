@@ -3,12 +3,17 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using CrossBackEnd.CrossPlatform.UI.Bootstrap.Android;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace CrossBackEnd.CrossPlatform.UI
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class App : Application
 	{
+        private IServiceCollection _services { get; set; }
+        public static IServiceProvider Container { get; private set; }
+
         public App()
         {
             InitializeComponent();
@@ -24,5 +29,9 @@ namespace CrossBackEnd.CrossPlatform.UI
                     break;
             }
         }
-	}
+        protected override void OnStart()
+        {
+            base.OnStart();
+        }
+    }
 }
