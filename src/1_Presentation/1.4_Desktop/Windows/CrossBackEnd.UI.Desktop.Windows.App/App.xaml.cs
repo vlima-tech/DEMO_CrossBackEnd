@@ -28,7 +28,7 @@ namespace CrossBackEnd.UI.Desktop.Windows.App
             ConfigureServices(this._services);
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        private void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper();
 

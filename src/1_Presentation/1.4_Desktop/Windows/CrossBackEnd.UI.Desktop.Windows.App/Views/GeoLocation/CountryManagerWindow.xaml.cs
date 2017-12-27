@@ -11,13 +11,13 @@ namespace CrossBackEnd.UI.Desktop.Windows.App.Views.GeoLocation
     /// </summary>
     public partial class CountryManagerWindow : Window
     {
-        private readonly ICountryManagerController _countryManagerController;
+        private readonly ICountryController _countryManagerController;
 
         public CountryManagerWindow()
         {
             InitializeComponent();
 
-            this._countryManagerController = App.Container.GetService<ICountryManagerController>();
+            this._countryManagerController = App.Container.GetService<ICountryController>();
 
             base.DataContext = this._countryManagerController;
         }

@@ -1,27 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage 
-    x:Class="CrossBackEnd.CrossPlatform.UI.Views.GeoLocation.CountryManagerPage"
+    x:Class="CrossBackEnd.CrossPlatform.UI.Views.GeoLocation.CountryDetailsPage"
     
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Country Manager"
     >
-
-    <StackLayout Orientation="Vertical">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="40"/>
-            </Grid.ColumnDefinitions>
-            <SearchBar x:Name="txtSearch" Grid.Column="0" SearchCommand="{Binding SearchCommand}"/>
-            <Button Grid.Column="1" Text="+" BackgroundColor="LightGreen" IsVisible="{Binding CountryNotExists, Mode=OneWay}"/>
-        </Grid>
-        <ListView CachingStrategy="RecycleElement" IsVisible="{Binding CountryExists, Mode=OneWay}"/>
-        
-        
-    </StackLayout>
     
-    <!--
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
@@ -44,7 +28,5 @@
             <Button Text="Save" Grid.Row="4" Grid.Column="1" BackgroundColor="Green" TextColor="White"/>
             <Button Text="Cancel" Grid.Row="4" Grid.Column="2" BackgroundColor="LightGray" TextColor="White"/>
         </StackLayout>
-        
     </Grid>
-    -->
 </ContentPage>

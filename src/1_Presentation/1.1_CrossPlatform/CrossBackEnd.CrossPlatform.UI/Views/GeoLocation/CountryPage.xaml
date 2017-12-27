@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    x:Class="CrossBackEnd.CrossPlatform.UI.Views.GeoLocation.CountryPage"
+    
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    >
+    <StackLayout Orientation="Vertical">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+            <SearchBar x:Name="txtSearch" Grid.Column="0" SearchCommand="{Binding SearchCommand}"/>
+            <Button Grid.Column="1" Text="+" BackgroundColor="LightGreen" IsVisible="{Binding CountryNotExists, Mode=OneWay}"/>
+        </Grid>
+        <ListView CachingStrategy="RecycleElement" IsVisible="{Binding CountryExists, Mode=OneWay}"/>
+        <Label/>
+    </StackLayout>
+    
+</ContentPage>

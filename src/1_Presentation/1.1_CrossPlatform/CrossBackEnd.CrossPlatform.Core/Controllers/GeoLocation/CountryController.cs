@@ -10,7 +10,7 @@ using CrossBackEnd.GeoLocation.Application.ViewModels;
 
 namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
 {
-    public class CountryController : BaseController, ICountryManagerController
+    public class CountryController : BaseController, ICountryController
     {
         public CountryCollection Countries { get; private set; }
         private string searchText = "";
