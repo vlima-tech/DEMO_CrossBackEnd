@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\2.1_Shared\CrossBackEnd.Shared.Kernel.Core\CrossBackEnd.Shared.Kernel.Core.csproj" />
     <ProjectReference Include="..\CrossBackEnd.GeoLocation.Application\CrossBackEnd.GeoLocation.Application.csproj" />
     <ProjectReference Include="..\CrossBackEnd.GeoLocation.Domain\CrossBackEnd.GeoLocation.Domain.csproj" />
     <ProjectReference Include="..\CrossBackEnd.GeoLocation.Infra.Client.Data\CrossBackEnd.GeoLocation.Infra.Client.Data.csproj" />

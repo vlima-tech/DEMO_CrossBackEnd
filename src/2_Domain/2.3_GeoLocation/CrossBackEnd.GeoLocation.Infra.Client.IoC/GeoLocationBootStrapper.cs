@@ -1,7 +1,4 @@
 ﻿
-using System;
-using System.Linq;
-using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
 using AutoMapper;
@@ -19,6 +16,9 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.IoC
     {
         public static IServiceCollection AddGeoLocation(this IServiceCollection services)
         {
+            services.AddSingleton(Mapper.Configuration);
+            services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<IConfigurationProvider>(), sp.GetService));
+            
             // Application Services
             services.AddScoped<ICountryAppService, CountryAppService>();
             //services.AddScoped<ICityAppService, CityAppService>();

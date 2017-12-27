@@ -15,8 +15,6 @@ namespace CrossBackEnd.UI.Desktop.Windows.App
     /// </summary>
     public partial class App : Application
     {
-      //  public static Container Container { get; private set; }
-
         private IServiceCollection _services { get; set; }
         public static IServiceProvider Container { get; private set; }
 

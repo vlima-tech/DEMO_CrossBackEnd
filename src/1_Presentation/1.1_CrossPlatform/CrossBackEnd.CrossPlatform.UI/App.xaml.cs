@@ -1,13 +1,15 @@
 ﻿
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
+
 using CrossBackEnd.CrossPlatform.Infra.IoC;
 using CrossBackEnd.CrossPlatform.UI.Bootstrap.Android;
 using CrossBackEnd.CrossPlatform.UI.Views._Menus;
-//using CrossBackEnd.GeoLocation.Infra.Client.IoC;
+using CrossBackEnd.GeoLocation.Infra.Client.IoC;
 
 namespace CrossBackEnd.CrossPlatform.UI
 {
@@ -39,14 +41,15 @@ namespace CrossBackEnd.CrossPlatform.UI
         
         private void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper();
+
+            services.AddGeoLocation();
             services.AddCrossPlatform();
-            //  this._services.AddGeoLocation();
+            
 
             services.AddScoped<AndroidRootPage>();
             services.AddScoped<MainMenuPage>();
-
-
-
+            
             Container = this._services.BuildServiceProvider();
         }
     }

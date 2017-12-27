@@ -19,14 +19,13 @@ namespace CrossBackEnd.GeoLocation.Application.AppServices
     {
         private readonly IBaseService<TModel> _baseService;
         private readonly IMapper _mapper;
-
+        
         public BaseAppService(IBaseService<TModel> baseService, IMapper mapper)
         {
             this._baseService = baseService;
             this._mapper = mapper;
-            
         }
-
+        
         public ExecutionResult<bool> Add(TViewModel obj)
         {
             //return this._baseService.Add(obj);

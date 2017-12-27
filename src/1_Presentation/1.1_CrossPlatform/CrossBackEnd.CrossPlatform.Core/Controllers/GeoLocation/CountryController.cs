@@ -16,12 +16,12 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
         private string searchText = "";
         private bool countryExists = true;
         private bool countryNotExists = false;
-        
+
         public ICommand AddCommand { get; private set; }
         public ICommand SaveCommand { get; private set; }
         public ICommand SearchCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
-        
+
         private readonly ICountryAppService _countryAppService;
 
         #region Gets and Sets
@@ -67,16 +67,16 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
             this._countryAppService = countryAppService;
 
             this.Countries = new CountryCollection();
-            
+
             this.SearchCommand = new Command<string>(SearchCountryCommand);
             this.DeleteCommand = new Command(DeleCountryCommand);
         }
 
         private void LoadCountries()
         {
-            var execResult = this._countryAppService.GetAll();
+            //var execResult = this._countryAppService.GetAll();
 
-            
+
         }
 
         private void AddCountryCommand(string searchText)
@@ -86,9 +86,9 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
 
         private void SaveCountryCommand(object countryViewModel)
         {
-            if(countryViewModel is CountryViewModel)
+            if (countryViewModel is CountryViewModel)
             {
-                
+
             }
             else
             {
@@ -98,14 +98,14 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
 
         private void SearchCountryCommand(string searchText)
         {
-            
+
         }
 
         private void DeleCountryCommand(object countryId)
         {
-            if(countryId is Guid)
+            if (countryId is Guid)
             {
-                
+
             }
             else
             {
