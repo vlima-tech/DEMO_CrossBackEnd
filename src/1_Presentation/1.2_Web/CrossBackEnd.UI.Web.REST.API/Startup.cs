@@ -1,13 +1,15 @@
 ﻿
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-using CrossBackEnd.GeoLocation.Infra.Server.IoC;
 using AutoMapper;
+
+using CrossBackEnd.GeoLocation.Infra.Server.IoC;
 
 namespace CrossBackEnd.UI.Web.REST.API
 {
@@ -24,12 +26,15 @@ namespace CrossBackEnd.UI.Web.REST.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            
+            services.AddApiVersioning(v =>
+            {
+                v.ReportApiVersions = true;
+                v.AssumeDefaultVersionWhenUnspecified = true;
+                v.DefaultApiVersion = new ApiVersion(1, 0);
+            });
+            
             services.AddAutoMapper();
-
-            /*
-            services.AddSingleton(Mapper.Configuration);
-            services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
-            */
 
             services.AddGeoLocation();
         }
@@ -44,18 +49,18 @@ namespace CrossBackEnd.UI.Web.REST.API
 
             app.UseMvc(routes => 
             {
-                /*
                 routes.MapRoute(
-                    name: "default",
-                    template: "api/{controller=Index}/{action=index}/{id?}"
+                    name: "unversionRoute",
+                    template: "{controller=Home}/{action=Index}/{id?}"
                 );
-                */
 
                 routes.MapRoute(
                     name: "default",
-                    template: "api/{context=country}/{controller=Country}/{action=get}/{id?}"
+                    template: "api/v{version=apiVersion}/{area:exists}/{controller=Index}/{action=Index}/{id?}"
                 );
             });
+
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

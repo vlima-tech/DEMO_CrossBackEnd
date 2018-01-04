@@ -66,11 +66,13 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
             this.Countries = new CountryCollection();
 
             this.SearchCommand = new Command<string>(SearchCountryCommand);
+
+            this.LoadCountries();
         }
 
         private void LoadCountries()
         {
-            //var execResult = this._countryAppService.GetAll();
+            var execResult = this._countryAppService.GetAll();
 
 
         }

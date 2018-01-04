@@ -50,6 +50,11 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
 
         public virtual ExecutionResult<IBaseCollection<TModel>> GetAll()
         {
+            string _namespace = typeof(TModel).Namespace
+                .Substring(0, typeof(TModel).Namespace.ToLower().IndexOf("domain") - 1);
+            
+            _namespace = _namespace.Substring(_namespace.LastIndexOf('.') + 1);
+
             throw new NotImplementedException();
         }
 
