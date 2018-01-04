@@ -58,8 +58,8 @@
     <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\packages\Microsoft.Extensions.DependencyModel.2.0.0\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Annotations">
@@ -124,6 +124,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\2_Domain\2.1_Shared\CrossBackEnd.Shared.Infra.Abstractions\CrossBackEnd.Shared.Infra.Abstractions.csproj">
+      <Project>{5b073547-8fe9-4aec-8096-63903fccffbd}</Project>
+      <Name>CrossBackEnd.Shared.Infra.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\2_Domain\2.1_Shared\CrossBackEnd.Shared.Kernel.Core\CrossBackEnd.Shared.Kernel.Core.csproj">
       <Project>{24924ee1-1bc7-4e4e-a16b-1ec45ae93bcf}</Project>
       <Name>CrossBackEnd.Shared.Kernel.Core</Name>

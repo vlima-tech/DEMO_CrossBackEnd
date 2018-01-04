@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using CrossBackEnd.GeoLocation.Application.Interfaces;
+using CrossBackEnd.GeoLocation.Application.ViewModels;
+using System.Collections.Generic;
 
 namespace CrossBackEnd.UI.Web.REST.API.Controllers.v1._0
 {
@@ -25,7 +27,13 @@ namespace CrossBackEnd.UI.Web.REST.API.Controllers.v1._0
         [HttpGet]
         public JsonResult Index()
         {
-            return Json(this._countryAppService.GetAll());
+            List<CountryViewModel> countries = new List<CountryViewModel>();
+
+            foreach (var item in this._countryAppService.GetAll().ReturnResult)
+                countries.Add(item);
+
+            //return Json(this._countryAppService.GetAll());
+            return Json(countries);
         }
 
         // GET: api/GeoLocation/Country/5

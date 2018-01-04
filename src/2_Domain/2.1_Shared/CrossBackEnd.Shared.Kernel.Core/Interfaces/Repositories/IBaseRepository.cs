@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
+using System.Threading.Tasks;
 
 namespace CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories
 {

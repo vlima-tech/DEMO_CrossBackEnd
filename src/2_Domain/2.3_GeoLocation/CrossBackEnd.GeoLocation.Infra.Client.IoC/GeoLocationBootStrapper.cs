@@ -9,6 +9,8 @@ using CrossBackEnd.GeoLocation.Domain.Interfaces.Repositories;
 using CrossBackEnd.GeoLocation.Domain.Interfaces.Services;
 using CrossBackEnd.GeoLocation.Domain.Services;
 using CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories;
+using CrossBackEnd.Shared.Infra.Abstractions;
+using CrossBackEnd.Shared.Infra.Services;
 
 namespace CrossBackEnd.GeoLocation.Infra.Client.IoC
 {
@@ -33,6 +35,8 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.IoC
             services.AddScoped<ICountryRepository, CountryRepository>();
             //services.AddScoped<ICityRepository, CityRepository>();
             //services.AddScoped<IStateRepository, StateRepository>();
+
+            services.AddScoped<IRequestService, RequestService>();
             
             return services;
         }

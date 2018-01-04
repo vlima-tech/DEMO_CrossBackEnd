@@ -18,6 +18,7 @@ namespace CrossBackEnd.Shared.Kernel.Core.ValueObjects
             this.Time = DateTime.Now;
             this.Errors = new BaseCollection<Message>();
             this.SystemErrors = new BaseCollection<Message>();
+            //this.ReturnResult = Activator.CreateInstance<TResult>();
         }
 
         public void DefineResult(TResult result)

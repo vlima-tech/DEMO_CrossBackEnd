@@ -1,9 +1,15 @@
 ﻿
 using System;
-using System.Net;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-
+using System.Threading.Tasks;
+using CrossBackEnd.GeoLocation.Application.ViewModels;
+using CrossBackEnd.GeoLocation.Domain.Models;
+using CrossBackEnd.Shared.Infra.Abstractions;
+using CrossBackEnd.Shared.Kernel.Core.Collections;
+using CrossBackEnd.Shared.Kernel.Core.Configuration;
+using CrossBackEnd.Shared.Kernel.Core.Extensions;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories;
@@ -13,11 +19,11 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
 {
     public class BaseRepository<TModel> : IBaseRepository<TModel> where TModel : class, IModel
     {
-        private readonly IWebRequestCreate _webRequest;
+        public IRequestService RequestService { get; private set; }
 
-        public BaseRepository()
+        public BaseRepository(IRequestService requestService)
         {
-//            this._webRequest = WebRequest.cr
+            this.RequestService = requestService;
         }
 
         public virtual ExecutionResult<bool> Add(TModel obj)
@@ -50,12 +56,38 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
 
         public virtual ExecutionResult<IBaseCollection<TModel>> GetAll()
         {
+            string className = typeof(TModel).Name;
             string _namespace = typeof(TModel).Namespace
                 .Substring(0, typeof(TModel).Namespace.ToLower().IndexOf("domain") - 1);
             
             _namespace = _namespace.Substring(_namespace.LastIndexOf('.') + 1);
 
-            throw new NotImplementedException();
+            UriBuilder builder = new UriBuilder(Settings.ApiEndPoint);
+
+            builder.AppendToPath("v" + Settings.ApiVersion);
+            builder.AppendToPath(_namespace);
+            builder.AppendToPath(className);
+
+            var oi = builder.Uri.ToString();
+
+            Teste(oi);
+
+            
+
+            return null;
+        }
+
+        private async void Teste(string uri)
+        {
+            try
+            {
+                var result = await this.RequestService.GetAsync<IEnumerable<CountryViewModel>>(uri);
+                
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         public virtual ExecutionResult<bool> Remove(Guid id)

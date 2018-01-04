@@ -12,6 +12,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
 using CrossBackEnd.Shared.Infra.Abstractions;
+using System.IO;
 
 namespace CrossBackEnd.Shared.Infra.Services
 {
@@ -33,9 +34,23 @@ namespace CrossBackEnd.Shared.Infra.Services
 
         public async Task<TResult> GetAsync<TResult>(string uri, string token = "")
         {
-            HttpClient httpClient = CreateHttpClient(token);
-            HttpResponseMessage response = await httpClient.GetAsync(uri);
+            /*
+            WebRequest r = WebRequest.Create(uri);
 
+            r.Method = "GET";
+            string teste = new StreamReader(r.GetResponse().GetResponseStream()).ReadToEnd();
+            */
+            
+            
+            HttpClient httpClient = new HttpClient();
+            httpClient.Timeout = new TimeSpan(0, 10, 0);
+            httpClient.BaseAddress = new Uri(@"http://192.168.0.34:59496/");
+
+            await httpClient.GetAsync(@"api/v1.0/GeoLocation/Country");
+
+            HttpResponseMessage response = await httpClient.GetAsync(new Uri(@"http://192.168.0.34:59496/api/v1.0/GeoLocation/Country"));
+
+            
             await HandleResponse(response);
 
             string serialized = await response.Content.ReadAsStringAsync();
