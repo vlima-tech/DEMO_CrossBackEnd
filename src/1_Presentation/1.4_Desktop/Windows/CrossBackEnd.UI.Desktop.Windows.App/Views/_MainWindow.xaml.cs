@@ -33,7 +33,7 @@ namespace CrossBackEnd.UI.Desktop.Windows.App.Views
         {
             var request = App.Container.GetService<IRequestService>();
             
-            var result = await request.GetAsync<IEnumerable<CountryViewModel>>("http://localhost:59496/api/v1.0/GeoLocation/Country");
+            var result = await request.GetAsync<ExecutionResult<IEnumerable<CountryViewModel>>>("http://localhost:59496/api/v1.0/GeoLocation/Country");
         }
     }
 }

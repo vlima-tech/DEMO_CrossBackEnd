@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using CrossBackEnd.GeoLocation.Application.ViewModels;
-using CrossBackEnd.GeoLocation.Domain.Models;
 using CrossBackEnd.Shared.Infra.Abstractions;
 using CrossBackEnd.Shared.Kernel.Core.Collections;
 using CrossBackEnd.Shared.Kernel.Core.Configuration;
@@ -81,7 +78,7 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
         {
             try
             {
-                var result = await this.RequestService.GetAsync<IEnumerable<CountryViewModel>>(uri);
+                //var result = await this.RequestService.GetAsync<ExecutionResult<IEnumerable<CountryViewModel>>>(uri);
                 
             }
             catch (Exception e)

@@ -1,12 +1,13 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using CrossBackEnd.GeoLocation.Application.Interfaces;
 using CrossBackEnd.GeoLocation.Application.ViewModels;
-using System.Collections.Generic;
+using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
 
 namespace CrossBackEnd.UI.Web.REST.API.Controllers.v1._0
 {
@@ -22,18 +23,25 @@ namespace CrossBackEnd.UI.Web.REST.API.Controllers.v1._0
         {
             this._countryAppService = countryAppService;
         }
-
+        
         // GET: api/v1.0/GeoLocation/Country
         [HttpGet]
         public JsonResult Index()
         {
+            
             List<CountryViewModel> countries = new List<CountryViewModel>();
 
             foreach (var item in this._countryAppService.GetAll().ReturnResult)
                 countries.Add(item);
+            
+            ExecutionResult<IEnumerable<CountryViewModel>> result = new ExecutionResult<IEnumerable<CountryViewModel>>();
+
+
+            result.DefineResult(countries);
+            
+            return Json(result);
 
             //return Json(this._countryAppService.GetAll());
-            return Json(countries);
         }
 
         // GET: api/GeoLocation/Country/5

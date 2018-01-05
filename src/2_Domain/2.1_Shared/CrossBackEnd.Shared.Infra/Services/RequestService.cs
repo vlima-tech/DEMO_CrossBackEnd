@@ -24,7 +24,8 @@ namespace CrossBackEnd.Shared.Infra.Services
         {
             _serializerSettings = new JsonSerializerSettings
             {
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                //ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                ContractResolver = new DefaultContractResolver(),
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore
             };
@@ -34,29 +35,27 @@ namespace CrossBackEnd.Shared.Infra.Services
 
         public async Task<TResult> GetAsync<TResult>(string uri, string token = "")
         {
-            /*
+            string responseData;
             WebRequest r = WebRequest.Create(uri);
 
             r.Method = "GET";
-            string teste = new StreamReader(r.GetResponse().GetResponseStream()).ReadToEnd();
-            */
-            
-            
-            HttpClient httpClient = new HttpClient();
-            httpClient.Timeout = new TimeSpan(0, 10, 0);
-            httpClient.BaseAddress = new Uri(@"http://192.168.0.34:59496/");
+            responseData = new StreamReader(r.GetResponse().GetResponseStream()).ReadToEnd();
 
-            await httpClient.GetAsync(@"api/v1.0/GeoLocation/Country");
+            TResult result = await Task.Run(() => JsonConvert.DeserializeObject<TResult>(responseData, _serializerSettings));
 
-            HttpResponseMessage response = await httpClient.GetAsync(new Uri(@"http://192.168.0.34:59496/api/v1.0/GeoLocation/Country"));
+            return result;
 
-            
+            /*
+            HttpClient httpClient = CreateHttpClient(token);
+            HttpResponseMessage response = await httpClient.GetAsync(uri);
+
             await HandleResponse(response);
 
             string serialized = await response.Content.ReadAsStringAsync();
             TResult result = await Task.Run(() => JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings));
 
             return result;
+            */
         }
 
         public Task<TResult> PostAsync<TResult>(string uri, TResult data, string token = "")

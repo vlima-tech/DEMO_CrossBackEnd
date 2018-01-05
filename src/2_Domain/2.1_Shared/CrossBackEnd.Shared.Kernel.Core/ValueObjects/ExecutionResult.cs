@@ -1,7 +1,8 @@
 ﻿
+using System;
+
 using CrossBackEnd.Shared.Kernel.Core.Collections;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
-using System;
 
 namespace CrossBackEnd.Shared.Kernel.Core.ValueObjects
 {
@@ -18,9 +19,11 @@ namespace CrossBackEnd.Shared.Kernel.Core.ValueObjects
             this.Time = DateTime.Now;
             this.Errors = new BaseCollection<Message>();
             this.SystemErrors = new BaseCollection<Message>();
-            //this.ReturnResult = Activator.CreateInstance<TResult>();
+            
+            if (typeof(TResult).IsClass)
+                this.ReturnResult = Activator.CreateInstance<TResult>();
         }
-
+        
         public void DefineResult(TResult result)
         { this.ReturnResult = result; }
 
