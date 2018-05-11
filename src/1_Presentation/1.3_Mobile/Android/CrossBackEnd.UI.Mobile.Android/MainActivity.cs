@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
@@ -7,13 +8,7 @@ using CrossBackEnd.CrossPlatform.UI;
 
 namespace CrossBackEnd.UI.Mobile.Droid
 {
-    [Activity(
-        Label = "DEMO_CrossBackEnd", 
-        Icon = "@drawable/icon", 
-        Theme = "@style/MainTheme", 
-        MainLauncher = true, 
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation
-    )]
+    [Activity(Label = "CrossBackEnd.UI.Mobile", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -28,3 +23,4 @@ namespace CrossBackEnd.UI.Mobile.Droid
         }
     }
 }
+

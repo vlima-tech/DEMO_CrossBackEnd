@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using CrossBackEnd.GeoLocation.Application.ViewModels;
 using CrossBackEnd.Shared.Infra.Abstractions;
 using CrossBackEnd.Shared.Kernel.Core.Collections;
 using CrossBackEnd.Shared.Kernel.Core.Configuration;
@@ -53,6 +54,8 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
 
         public virtual ExecutionResult<IBaseCollection<TModel>> GetAll()
         {
+            var result = new ExecutionResult<IBaseCollection<TModel>>();
+            string url;
             string className = typeof(TModel).Name;
             string _namespace = typeof(TModel).Namespace
                 .Substring(0, typeof(TModel).Namespace.ToLower().IndexOf("domain") - 1);
@@ -65,20 +68,20 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
             builder.AppendToPath(_namespace);
             builder.AppendToPath(className);
 
-            var oi = builder.Uri.ToString();
+            url = builder.Uri.ToString();
 
-            Teste(oi);
+            Teste(url);
 
-            
+            this.RequestService.GetAsync<ExecutionResult<IEnumerable<CountryViewModel>>>(url).GetAwaiter().GetResult();
 
-            return null;
+            return result;
         }
 
         private async void Teste(string uri)
         {
             try
             {
-                //var result = await this.RequestService.GetAsync<ExecutionResult<IEnumerable<CountryViewModel>>>(uri);
+                var result = await this.RequestService.GetAsync<ExecutionResult<IEnumerable<CountryViewModel>>>(uri);
                 
             }
             catch (Exception e)
