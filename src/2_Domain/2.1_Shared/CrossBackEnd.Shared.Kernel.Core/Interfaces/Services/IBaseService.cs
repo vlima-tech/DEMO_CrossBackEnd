@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
@@ -17,7 +18,8 @@ namespace CrossBackEnd.Shared.Kernel.Core.Interfaces.Services
         ExecutionResult<bool> Exists(Guid id);
         ExecutionResult<bool> Exists(TModel item);
         ExecutionResult<TModel> SearchById(Guid id);
-        ExecutionResult<IBaseCollection<TModel>> GetAll();
+        ExecutionResult<IBaseCollection<TModel>> LoadAll();
+        Task<ExecutionResult<IBaseCollection<TModel>>> LoadAllAsync();
         ExecutionResult<IBaseCollection<TModel>> Find(Expression<Func<TModel, bool>> predicate, bool tracking);
     }
 }

@@ -26,9 +26,17 @@ namespace CrossBackEnd.UI.Web.REST.API.Controllers.v1._0
         
         // GET: api/v1.0/GeoLocation/Country
         [HttpGet]
-        public JsonResult Index()
+        public IActionResult Index()
         {
+            var result = this._countryAppService.LoadAll();
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result);
             
+
+            /*
             List<CountryViewModel> countries = new List<CountryViewModel>();
 
             foreach (var item in this._countryAppService.GetAll().ReturnResult)
@@ -42,6 +50,7 @@ namespace CrossBackEnd.UI.Web.REST.API.Controllers.v1._0
             return Json(result);
 
             //return Json(this._countryAppService.GetAll());
+            */
         }
 
         // GET: api/GeoLocation/Country/5

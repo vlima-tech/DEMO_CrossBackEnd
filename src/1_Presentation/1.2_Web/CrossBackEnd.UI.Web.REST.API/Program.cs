@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
+using CrossBackEnd.Shared.Infra.IoC;
+
 namespace CrossBackEnd.UI.Web.REST.API
 {
     public class Program
@@ -14,6 +16,7 @@ namespace CrossBackEnd.UI.Web.REST.API
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseUrls("http://*:59496")
+                .UseKestrel()
                 .UseStartup<Startup>()
                 .Build();
     }

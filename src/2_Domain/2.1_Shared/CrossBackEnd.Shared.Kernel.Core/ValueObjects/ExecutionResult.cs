@@ -46,6 +46,10 @@ namespace CrossBackEnd.Shared.Kernel.Core.ValueObjects
         }
 
         private bool HasErrors()
-        { return this.Errors.Count.Equals(0) && this.SystemErrors.Count.Equals(0); }
+        {
+            //return this.Errors.Count.Equals(0) && this.SystemErrors.Count.Equals(0);
+
+            return false;
+        }
     }
 }

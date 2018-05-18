@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 using CrossBackEnd.CrossPlatform.Abstractions.Controllers.GeoLocation;
@@ -65,21 +66,31 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
 
             this.Countries = new CountryCollection();
 
-            this.SearchCommand = new Command<string>(SearchCountryCommand);
+            //this.SearchCommand = new Command<string>(SearchCountryCommand);
+            this.SearchCommand = new AsyncCommand(SearchCountryCommand);
 
-            this.LoadCountries();
-        }
-
-        private void LoadCountries()
-        {
-            var execResult = this._countryAppService.GetAll();
-
-
+            //this.LoadCountriesAsync();
         }
         
+        private void LoadCountriesAsync()
+        {
+            var execResult = this._countryAppService.LoadAll();
+        }
+        /*
+        private async void LoadCountries()
+        {
+            var execResult = await this._countryAppService.LoadAllAsync();
+        }
+        */
+        /*
         private void SearchCountryCommand(string searchText)
         {
-
+            var execResult = this._countryAppService.LoadAll();
+        }
+        */
+        private async Task SearchCountryCommand()
+        {
+            var execResult = await this._countryAppService.LoadAllAsync();    
         }
     }
 }

@@ -10,6 +10,7 @@ using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
+using System.Threading.Tasks;
 
 namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
 {
@@ -217,6 +218,20 @@ namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
                 new BaseCollection<TEntity>(
                     this._baseRepository.Set<TEntity>()
                         .ToList()
+                )
+            );
+
+            return execResult;
+        }
+
+        public async Task<ExecutionResult<IBaseCollection<TEntity>>> GetAllAsync()
+        {
+            var execResult = new ExecutionResult<IBaseCollection<TEntity>>();
+
+            execResult.DefineResult(
+                new BaseCollection<TEntity>(
+                    await this._baseRepository.Set<TEntity>()
+                        .ToListAsync()
                 )
             );
 

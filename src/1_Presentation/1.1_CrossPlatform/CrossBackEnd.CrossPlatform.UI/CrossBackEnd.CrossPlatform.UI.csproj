@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
@@ -12,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\2_Domain\2.1_Shared\CrossBackEnd.Shared.Infra.IoC\CrossBackEnd.Shared.Infra.IoC.csproj" />
     <ProjectReference Include="..\..\..\2_Domain\2.3_GeoLocation\CrossBackEnd.GeoLocation.Infra.Client.IoC\CrossBackEnd.GeoLocation.Infra.Client.IoC.csproj" />
     <ProjectReference Include="..\CrossBackEnd.CrossPlatform.Infra.IoC\CrossBackEnd.CrossPlatform.Infra.IoC.csproj" />
   </ItemGroup>

@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\2_Domain\2.1_Shared\CrossBackEnd.Shared.Infra.IoC\CrossBackEnd.Shared.Infra.IoC.csproj" />
     <ProjectReference Include="..\..\..\2_Domain\2.3_GeoLocation\CrossBackEnd.GeoLocation.Application\CrossBackEnd.GeoLocation.Application.csproj" />
     <ProjectReference Include="..\..\..\2_Domain\2.3_GeoLocation\CrossBackEnd.GeoLocation.Infra.Server.IoC\CrossBackEnd.GeoLocation.Infra.Server.IoC.csproj" />
   </ItemGroup>

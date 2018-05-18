@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.IO;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
@@ -19,6 +19,7 @@ namespace CrossBackEnd.UI.Mobile.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            
             LoadApplication(new App());
         }
     }

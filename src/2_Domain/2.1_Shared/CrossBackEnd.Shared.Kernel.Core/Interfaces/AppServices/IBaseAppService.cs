@@ -3,6 +3,7 @@ using System;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.MVVM;
+using System.Threading.Tasks;
 
 namespace CrossBackEnd.Shared.Kernel.Core.Interfaces.AppServices
 {
@@ -15,6 +16,7 @@ namespace CrossBackEnd.Shared.Kernel.Core.Interfaces.AppServices
         ExecutionResult<bool> Exists(Guid id);
         ExecutionResult<bool> Exists(TViewModel item);
         ExecutionResult<TViewModel> SearchById(Guid id);
-        ExecutionResult<IBaseCollection<TViewModel>> GetAll();
+        ExecutionResult<IBaseCollection<TViewModel>> LoadAll();
+        Task<ExecutionResult<IBaseCollection<TViewModel>>> LoadAllAsync();
     }
 }

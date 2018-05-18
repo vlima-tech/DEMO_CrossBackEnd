@@ -1,10 +1,12 @@
 ﻿
 using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using System.IO;
+using System.Reflection;
 
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 using CrossBackEnd.CrossPlatform.Infra.IoC;
 using CrossBackEnd.CrossPlatform.UI.Bootstrap.Android;
@@ -22,31 +24,31 @@ namespace CrossBackEnd.CrossPlatform.UI
         public App()
         {
             InitializeComponent();
-
+            
             this._services = new ServiceCollection();
-
-            this.ConfigureServices(this._services);
             
             switch (Device.RuntimePlatform)
             {
                 case Device.Android:
-                    //MainPage = new HomePage();
                     MainPage = new AndroidRootPage();
                     break;
 
                 case Device.iOS:
                     break;
             }
+
+            this.ConfigureServices(this._services);
         }
         
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper();
+            
+            services.AddConfiguration<App>();
 
             services.AddGeoLocation();
             services.AddCrossPlatform();
             
-
             services.AddScoped<AndroidRootPage>();
             services.AddScoped<MainMenuPage>();
             

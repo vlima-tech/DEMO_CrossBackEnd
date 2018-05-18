@@ -7,6 +7,7 @@ using CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
+using System.Threading.Tasks;
 
 namespace CrossBackEnd.GeoLocation.Domain.Services
 {
@@ -42,9 +43,14 @@ namespace CrossBackEnd.GeoLocation.Domain.Services
             return this._baseRepository.Find(predicate, tracking);
         }
 
-        public ExecutionResult<IBaseCollection<TEntity>> GetAll()
+        public ExecutionResult<IBaseCollection<TEntity>> LoadAll()
         {
             return this._baseRepository.GetAll();
+        }
+
+        public Task<ExecutionResult<IBaseCollection<TEntity>>> LoadAllAsync()
+        {
+            return this._baseRepository.GetAllAsync();
         }
 
         public ExecutionResult<TEntity> SearchById(Guid id)

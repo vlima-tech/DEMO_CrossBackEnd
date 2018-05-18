@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+
+using Microsoft.Extensions.Configuration;
+
 using CrossBackEnd.GeoLocation.Application.ViewModels;
 using CrossBackEnd.Shared.Infra.Abstractions;
 using CrossBackEnd.Shared.Kernel.Core.Collections;
@@ -12,16 +15,20 @@ using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
+using System.Threading.Tasks;
 
 namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
 {
     public class BaseRepository<TModel> : IBaseRepository<TModel> where TModel : class, IModel
     {
         public IRequestService RequestService { get; private set; }
+        public Settings Settings { get; private set; }
 
-        public BaseRepository(IRequestService requestService)
+        public BaseRepository(IRequestService requestService, IConfiguration configuration)
         {
             this.RequestService = requestService;
+
+            this.Settings = configuration.Get<Settings>();
         }
 
         public virtual ExecutionResult<bool> Add(TModel obj)
@@ -54,7 +61,7 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
 
         public virtual ExecutionResult<IBaseCollection<TModel>> GetAll()
         {
-            var result = new ExecutionResult<IBaseCollection<TModel>>();
+            ExecutionResult<IBaseCollection<TModel>> result = new ExecutionResult<IBaseCollection<TModel>>();
             string url;
             string className = typeof(TModel).Name;
             string _namespace = typeof(TModel).Namespace
@@ -70,24 +77,42 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
 
             url = builder.Uri.ToString();
 
-            Teste(url);
+            try
+            {
+                var r = this.RequestService.Get<ExecutionResult<List<CountryViewModel>>>(url);
 
-            this.RequestService.GetAsync<ExecutionResult<IEnumerable<CountryViewModel>>>(url).GetAwaiter().GetResult();
+                var id = r.ReturnResult[0].CountryId;
+            }
+            catch(Exception e)
+            {
+
+            }
 
             return result;
         }
 
-        private async void Teste(string uri)
+        public async virtual Task<ExecutionResult<IBaseCollection<TModel>>> GetAllAsync()
         {
-            try
-            {
-                var result = await this.RequestService.GetAsync<ExecutionResult<IEnumerable<CountryViewModel>>>(uri);
-                
-            }
-            catch (Exception e)
-            {
+            ExecutionResult<IBaseCollection<TModel>> result = new ExecutionResult<IBaseCollection<TModel>>();
+            string url;
+            string className = typeof(TModel).Name;
+            string _namespace = typeof(TModel).Namespace
+                .Substring(0, typeof(TModel).Namespace.ToLower().IndexOf("domain") - 1);
 
-            }
+            _namespace = _namespace.Substring(_namespace.LastIndexOf('.') + 1);
+
+            UriBuilder builder = new UriBuilder(Settings.ApiEndPoint);
+
+            builder.AppendToPath("v" + Settings.ApiVersion);
+            builder.AppendToPath(_namespace);
+            builder.AppendToPath(className);
+
+            url = builder.Uri.ToString();
+
+            var r = await this.RequestService.GetAsync<ExecutionResult<List<CountryViewModel>>>(url);
+            
+
+            return result;
         }
 
         public virtual ExecutionResult<bool> Remove(Guid id)

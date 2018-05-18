@@ -20,6 +20,7 @@ namespace CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories
         ExecutionResult<bool> Exists(TEntity item);
         ExecutionResult<TEntity> SearchById(Guid id);
         ExecutionResult<IBaseCollection<TEntity>> GetAll();
+        Task<ExecutionResult<IBaseCollection<TEntity>>> GetAllAsync();
         ExecutionResult<IBaseCollection<TEntity>> Find(Expression<Func<TEntity, bool>> predicate, bool tracking);
         ExecutionResult<IQueryable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate, bool tracking);
     }

@@ -10,6 +10,7 @@ using CrossBackEnd.Shared.Kernel.Core.Interfaces.Services;
 using CrossBackEnd.Shared.Kernel.Core.MVVM;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.MVVM;
+using System.Threading.Tasks;
 
 namespace CrossBackEnd.GeoLocation.Application.AppServices
 {
@@ -54,15 +55,28 @@ namespace CrossBackEnd.GeoLocation.Application.AppServices
             return new ExecutionResult<bool>();
         }
         
-        public ExecutionResult<IBaseCollection<TViewModel>> GetAll()
+        public ExecutionResult<IBaseCollection<TViewModel>> LoadAll()
         {
             var execResult = new ExecutionResult<IBaseCollection<TViewModel>>();
 
             execResult.DefineResult(
-                this.ConvertModelToViewModel(this._baseService.GetAll().ReturnResult)
+                this.ConvertModelToViewModel(this._baseService.LoadAll().ReturnResult)
             );
 
             return execResult;
+        }
+
+        public Task<ExecutionResult<IBaseCollection<TViewModel>>> LoadAllAsync()
+        {
+            var execResult = new ExecutionResult<IBaseCollection<TViewModel>>();
+
+            var result = this._baseService.LoadAllAsync().GetAwaiter().GetResult();
+
+            execResult.DefineResult(
+                this.ConvertModelToViewModel(result.ReturnResult)
+            );
+
+            return Task.FromResult(execResult);
         }
 
         public ExecutionResult<bool> Remove(Guid id)

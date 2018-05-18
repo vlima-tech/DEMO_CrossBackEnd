@@ -5,13 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.json" Version="11.0.2" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\2.3_GeoLocation\CrossBackEnd.GeoLocation.Application\CrossBackEnd.GeoLocation.Application.csproj" />
     <ProjectReference Include="..\CrossBackEnd.Shared.Infra.Abstractions\CrossBackEnd.Shared.Infra.Abstractions.csproj" />
-    <ProjectReference Include="..\CrossBackEnd.Shared.Kernel.Core\CrossBackEnd.Shared.Kernel.Core.csproj" />
   </ItemGroup>
 
 </Project>

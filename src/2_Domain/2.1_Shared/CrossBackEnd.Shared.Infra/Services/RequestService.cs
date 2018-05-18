@@ -1,10 +1,6 @@
 ﻿
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
@@ -12,127 +8,82 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
 using CrossBackEnd.Shared.Infra.Abstractions;
-using System.IO;
+using CrossBackEnd.Shared.Infra.Converters;
+using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
+using CrossBackEnd.GeoLocation.Application.ViewModels;
+using System.Collections.Generic;
 
 namespace CrossBackEnd.Shared.Infra.Services
 {
     public class RequestService : IRequestService
     {
-        private readonly JsonSerializerSettings _serializerSettings;
+        private JsonSerializerSettings _serializerSettings { get; }
 
         public RequestService()
         {
-            _serializerSettings = new JsonSerializerSettings
+            this._serializerSettings = new JsonSerializerSettings
             {
-                //ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                ContractResolver = new DefaultContractResolver(),
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore
             };
 
-            _serializerSettings.Converters.Add(new StringEnumConverter());
+            this._serializerSettings.Converters.Add(new StringEnumConverter());
+           // this._serializerSettings.Converters.Add(new GuidConverter());
         }
 
-        public async Task<TResult> GetAsync<TResult>(string uri, string token = "")
+        public TResult Get<TResult>(string uri, string token = "")
         {
-            string responseData;
-            WebRequest r = WebRequest.Create(uri);
+            HttpClient request = new HttpClient();
+            HttpResponseMessage response;
+            string content;
 
-            r.Method = "GET";
-            responseData = new StreamReader(r.GetResponse().GetResponseStream()).ReadToEnd();
+            response = request.GetAsync(uri)
+                                .GetAwaiter()
+                                .GetResult();
 
-            TResult result = await Task.Run(() => JsonConvert.DeserializeObject<TResult>(responseData, _serializerSettings));
+            content = response.Content.ReadAsStringAsync()
+                                        .GetAwaiter()
+                                        .GetResult();
 
-            return result;
+            var item = JsonConvert.DeserializeObject<TResult>(content, this._serializerSettings);
+            
+            return item;
+        }
 
-            /*
-            HttpClient httpClient = CreateHttpClient(token);
-            HttpResponseMessage response = await httpClient.GetAsync(uri);
+        public Task<TResult> GetAsync<TResult>(string uri, string token = "")
+        {
+            HttpClient request = new HttpClient();
+            HttpResponseMessage response;
+            string content;
 
-            await HandleResponse(response);
+            response = request.GetAsync(uri).GetAwaiter().GetResult();
 
-            string serialized = await response.Content.ReadAsStringAsync();
-            TResult result = await Task.Run(() => JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings));
+            content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            
+            TResult item = JsonConvert.DeserializeObject<TResult>(content, this._serializerSettings);
 
-            return result;
-            */
+            return Task.FromResult(item);
         }
 
         public Task<TResult> PostAsync<TResult>(string uri, TResult data, string token = "")
         {
-            return PostAsync<TResult, TResult>(uri, data, token);
+            throw new System.NotImplementedException();
         }
 
-        public async Task<TResult> PostAsync<TRequest, TResult>(string uri, TRequest data, string token = "")
+        public Task<TResult> PostAsync<TRequest, TResult>(string uri, TRequest data, string token = "")
         {
-            HttpClient httpClient = CreateHttpClient(token);
-            string serialized = await Task.Run(() => JsonConvert.SerializeObject(data, _serializerSettings));
-            HttpResponseMessage response = await httpClient.PostAsync(uri, new StringContent(serialized, Encoding.UTF8, "application/json"));
-
-            await HandleResponse(response);
-
-            string responseData = await response.Content.ReadAsStringAsync();
-
-            return await Task.Run(() => JsonConvert.DeserializeObject<TResult>(responseData, _serializerSettings));
+            throw new System.NotImplementedException();
         }
 
         public Task<TResult> PutAsync<TResult>(string uri, TResult data, string token = "")
         {
-            return PutAsync<TResult, TResult>(uri, data, token);
+            throw new System.NotImplementedException();
         }
 
-        public async Task<TResult> PutAsync<TRequest, TResult>(string uri, TRequest data, string token = "")
+        public Task<TResult> PutAsync<TRequest, TResult>(string uri, TRequest data, string token = "")
         {
-            HttpClient httpClient = CreateHttpClient(token);
-            string serialized = await Task.Run(() => JsonConvert.SerializeObject(data, _serializerSettings));
-            HttpResponseMessage response = await httpClient.PutAsync(uri, new StringContent(serialized, Encoding.UTF8, "application/json"));
-
-            await HandleResponse(response);
-
-            string responseData = await response.Content.ReadAsStringAsync();
-
-            return await Task.Run(() => JsonConvert.DeserializeObject<TResult>(responseData, _serializerSettings));
-        }
-
-        private HttpClient CreateHttpClient(string token = "")
-        {
-            var httpClient = new HttpClient();
-
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            if (!string.IsNullOrEmpty(token))
-            {
-                if (IsEmail(token))
-                {
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Email", token);
-                }
-                else
-                {
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                }
-            }
-
-            return httpClient;
-        }
-
-        private bool IsEmail(string email)
-        {
-            return new EmailAddressAttribute().IsValid(email);
-        }
-
-        private async Task HandleResponse(HttpResponseMessage response)
-        {
-            if (!response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-
-                if (response.StatusCode == HttpStatusCode.Forbidden || response.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    throw new Exception(content);
-                }
-
-                throw new HttpRequestException(content);
-            }
+            throw new System.NotImplementedException();
         }
     }
 }
