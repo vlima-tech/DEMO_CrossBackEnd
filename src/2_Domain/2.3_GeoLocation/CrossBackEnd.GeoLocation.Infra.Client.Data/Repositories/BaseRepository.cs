@@ -16,6 +16,8 @@ using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
 using System.Threading.Tasks;
+using CrossBackEnd.GeoLocation.Infra.Client.Data.Helpers;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces;
 
 namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
 {
@@ -31,12 +33,12 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
             this.Settings = configuration.Get<Settings>();
         }
 
-        public virtual ExecutionResult<bool> Add(TModel obj)
+        public virtual ExecutionResult<bool> Save(TModel obj)
         {
             throw new NotImplementedException();
         }
 
-        public virtual ExecutionResult AddRange(TModel[] array)
+        public virtual ExecutionResult SaveRange(TModel[] array)
         {
             throw new NotImplementedException();
         }
@@ -59,58 +61,26 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public virtual ExecutionResult<IBaseCollection<TModel>> GetAll()
+        public virtual IExecutionResult<BaseCollection<TModel>> GetAll()
         {
-            ExecutionResult<IBaseCollection<TModel>> result = new ExecutionResult<IBaseCollection<TModel>>();
-            string url;
-            string className = typeof(TModel).Name;
-            string _namespace = typeof(TModel).Namespace
-                .Substring(0, typeof(TModel).Namespace.ToLower().IndexOf("domain") - 1);
+            IExecutionResult<BaseCollection<TModel>> result;
+            Uri url;
+
+            url = RouteHelper.GenerateUrl<TModel>(this.Settings.ApiEndPoint, this.Settings.ApiVersion);
             
-            _namespace = _namespace.Substring(_namespace.LastIndexOf('.') + 1);
-
-            UriBuilder builder = new UriBuilder(Settings.ApiEndPoint);
-
-            builder.AppendToPath("v" + Settings.ApiVersion);
-            builder.AppendToPath(_namespace);
-            builder.AppendToPath(className);
-
-            url = builder.Uri.ToString();
-
-            try
-            {
-                var r = this.RequestService.Get<ExecutionResult<List<CountryViewModel>>>(url);
-
-                var id = r.ReturnResult[0].CountryId;
-            }
-            catch(Exception e)
-            {
-
-            }
-
+            result = this.RequestService.Get<BaseCollection<TModel>>(url.ToString());
+            
             return result;
         }
-
-        public async virtual Task<ExecutionResult<IBaseCollection<TModel>>> GetAllAsync()
+        
+        public async virtual Task<IExecutionResult<BaseCollection<TModel>>> GetAllAsync()
         {
-            ExecutionResult<IBaseCollection<TModel>> result = new ExecutionResult<IBaseCollection<TModel>>();
-            string url;
-            string className = typeof(TModel).Name;
-            string _namespace = typeof(TModel).Namespace
-                .Substring(0, typeof(TModel).Namespace.ToLower().IndexOf("domain") - 1);
-
-            _namespace = _namespace.Substring(_namespace.LastIndexOf('.') + 1);
-
-            UriBuilder builder = new UriBuilder(Settings.ApiEndPoint);
-
-            builder.AppendToPath("v" + Settings.ApiVersion);
-            builder.AppendToPath(_namespace);
-            builder.AppendToPath(className);
-
-            url = builder.Uri.ToString();
-
-            var r = await this.RequestService.GetAsync<ExecutionResult<List<CountryViewModel>>>(url);
+            IExecutionResult<BaseCollection<TModel>> result;// = new ExecutionResult<BaseCollection<TModel>>();
+            Uri url;
             
+            url = RouteHelper.GenerateUrl<TModel>(this.Settings.ApiEndPoint, this.Settings.ApiVersion);
+
+            result = await this.RequestService.GetAsync<BaseCollection<TModel>>(url.ToString());
 
             return result;
         }

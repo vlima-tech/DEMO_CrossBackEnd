@@ -21,7 +21,7 @@ namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
         public BaseRepository(GeoLocation_Context geoLocationContext)
         { this._baseRepository = geoLocationContext; }
 
-        public ExecutionResult<bool> Add(TEntity obj)
+        public ExecutionResult<bool> Save(TEntity obj)
         {
             ExecutionResult<bool> execResult = new ExecutionResult<bool>();
             int result;
@@ -55,7 +55,7 @@ namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
             return execResult;
         }
 
-        public ExecutionResult AddRange(TEntity[] array)
+        public ExecutionResult SaveRange(TEntity[] array)
         {
             ExecutionResult execResult = new ExecutionResult();
             

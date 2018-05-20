@@ -1,5 +1,6 @@
 ﻿
 using System;
+
 using Newtonsoft.Json;
 
 namespace CrossBackEnd.Shared.Infra.Converters

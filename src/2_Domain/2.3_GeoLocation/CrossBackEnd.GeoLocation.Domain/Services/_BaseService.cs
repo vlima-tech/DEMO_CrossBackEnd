@@ -8,6 +8,8 @@ using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
 using System.Threading.Tasks;
+using CrossBackEnd.Shared.Kernel.Core.Collections;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces;
 
 namespace CrossBackEnd.GeoLocation.Domain.Services
 {
@@ -20,12 +22,12 @@ namespace CrossBackEnd.GeoLocation.Domain.Services
 
         public ExecutionResult<bool> Add(TEntity obj)
         {
-            return this._baseRepository.Add(obj);
+            return this._baseRepository.Save(obj);
         }
 
         public ExecutionResult AddRange(TEntity[] array)
         {
-            return this._baseRepository.AddRange(array);
+            return this._baseRepository.SaveRange(array);
         }
         
         public ExecutionResult<bool> Exists(TEntity item)
@@ -43,14 +45,14 @@ namespace CrossBackEnd.GeoLocation.Domain.Services
             return this._baseRepository.Find(predicate, tracking);
         }
 
-        public ExecutionResult<IBaseCollection<TEntity>> LoadAll()
+        public IExecutionResult<BaseCollection<TEntity>> LoadAll()
         {
             return this._baseRepository.GetAll();
         }
 
-        public Task<ExecutionResult<IBaseCollection<TEntity>>> LoadAllAsync()
-        {
-            return this._baseRepository.GetAllAsync();
+        public async Task<IExecutionResult<BaseCollection<TEntity>>> LoadAllAsync()
+        {   
+            return this._baseRepository.GetAllAsync().GetAwaiter().GetResult();
         }
 
         public ExecutionResult<TEntity> SearchById(Guid id)

@@ -1,5 +1,4 @@
 ﻿
-using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -7,7 +6,11 @@ using CrossBackEnd.CrossPlatform.Abstractions.Controllers.GeoLocation;
 using CrossBackEnd.CrossPlatform.Core.Collection;
 using CrossBackEnd.CrossPlatform.Core.MVVM;
 using CrossBackEnd.GeoLocation.Application.Interfaces;
+
 using CrossBackEnd.GeoLocation.Application.ViewModels;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces.AppServices;
+using CrossBackEnd.Shared.Kernel.Core.Collections;
 
 namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
 {
@@ -66,31 +69,45 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
 
             this.Countries = new CountryCollection();
 
-            //this.SearchCommand = new Command<string>(SearchCountryCommand);
-            this.SearchCommand = new AsyncCommand(SearchCountryCommand);
+           // this.SearchCommand = new Command<string>(SearchCountryCommand);
+            this.SearchCommand = new AsyncCommand(SearchCountryCommanAsync);
 
             //this.LoadCountriesAsync();
+            //this.LoadCountries();
         }
-        
-        private void LoadCountriesAsync()
+
+        private void LoadCountries()
         {
             var execResult = this._countryAppService.LoadAll();
         }
-        /*
-        private async void LoadCountries()
+        
+        private async void LoadCountriesAsync()
         {
             var execResult = await this._countryAppService.LoadAllAsync();
         }
-        */
-        /*
+        
         private void SearchCountryCommand(string searchText)
         {
-            var execResult = this._countryAppService.LoadAll();
+            var result = this._countryAppService.LoadAll();
+
+            if (result.Success)
+            {
+                this.Countries.Clear();
+                this.Countries.AddRange(result.ReturnResult);
+            }
+
+            result.Dispose();
         }
-        */
-        private async Task SearchCountryCommand()
+        
+        private async Task SearchCountryCommanAsync()
         {
-            var execResult = await this._countryAppService.LoadAllAsync();    
+            var result = this._countryAppService.LoadAllAsync().GetAwaiter().GetResult();
+
+            if (result.Success)
+            {
+                this.Countries.Clear();
+                this.Countries.AddRange(result.ReturnResult);
+            }
         }
     }
 }

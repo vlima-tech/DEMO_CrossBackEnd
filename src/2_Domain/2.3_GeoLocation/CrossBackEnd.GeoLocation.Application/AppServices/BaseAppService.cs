@@ -2,6 +2,7 @@
 using AutoMapper;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.AppServices;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
@@ -10,7 +11,9 @@ using CrossBackEnd.Shared.Kernel.Core.Interfaces.Services;
 using CrossBackEnd.Shared.Kernel.Core.MVVM;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.MVVM;
-using System.Threading.Tasks;
+
+using CrossBackEnd.Shared.Kernel.Core.Collections;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces;
 
 namespace CrossBackEnd.GeoLocation.Application.AppServices
 {
@@ -55,28 +58,28 @@ namespace CrossBackEnd.GeoLocation.Application.AppServices
             return new ExecutionResult<bool>();
         }
         
-        public ExecutionResult<IBaseCollection<TViewModel>> LoadAll()
+        public IExecutionResult<BaseCollection<TViewModel>> LoadAll()
         {
-            var execResult = new ExecutionResult<IBaseCollection<TViewModel>>();
+            IExecutionResult<BaseCollection<TViewModel>> execResult = new ExecutionResult<BaseCollection<TViewModel>>();
 
             execResult.DefineResult(
-                this.ConvertModelToViewModel(this._baseService.LoadAll().ReturnResult)
+                this.ConvertModelToViewModel(this._baseService.LoadAll().ReturnResult) as BaseCollection<TViewModel>
             );
 
             return execResult;
         }
 
-        public Task<ExecutionResult<IBaseCollection<TViewModel>>> LoadAllAsync()
+        public async Task<IExecutionResult<BaseCollection<TViewModel>>> LoadAllAsync()
         {
-            var execResult = new ExecutionResult<IBaseCollection<TViewModel>>();
+            IExecutionResult<BaseCollection<TViewModel>> execResult = new ExecutionResult<BaseCollection<TViewModel>>();
 
-            var result = this._baseService.LoadAllAsync().GetAwaiter().GetResult();
+            var result = await this._baseService.LoadAllAsync();
 
             execResult.DefineResult(
-                this.ConvertModelToViewModel(result.ReturnResult)
+                this.ConvertModelToViewModel(result.ReturnResult) as BaseCollection<TViewModel>
             );
-
-            return Task.FromResult(execResult);
+            
+            return execResult;
         }
 
         public ExecutionResult<bool> Remove(Guid id)

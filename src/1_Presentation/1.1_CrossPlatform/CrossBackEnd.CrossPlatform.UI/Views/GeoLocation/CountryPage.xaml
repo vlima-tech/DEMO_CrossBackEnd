@@ -5,7 +5,20 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     >
-    <StackLayout Orientation="Vertical">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="ListViewItemTemplate">
+                <ViewCell >
+                    <StackLayout BackgroundColor="LightBlue" Spacing="10" Orientation="Horizontal" HeightRequest="70">
+                        <Label Text="{Binding Abbreviation}"/>
+                        <Label Text="{Binding Name}"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -14,7 +27,7 @@
             <SearchBar x:Name="txtSearch" Grid.Column="0" SearchCommand="{Binding SearchCommand}"/>
             <Button Grid.Column="1" Text="+" BackgroundColor="LightGreen" IsVisible="{Binding CountryNotExists, Mode=OneWay}"/>
         </Grid>
-        <ListView CachingStrategy="RecycleElement" IsVisible="{Binding CountryExists, Mode=OneWay}"/>
+        <ListView CachingStrategy="RecycleElement" ItemsSource="{Binding Countries, Mode=OneWay}" ItemTemplate="{StaticResource ListViewItemTemplate}"/>
         <Label/>
     </StackLayout>
     

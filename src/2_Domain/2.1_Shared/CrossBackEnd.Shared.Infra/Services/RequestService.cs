@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 
 using CrossBackEnd.Shared.Infra.Abstractions;
-using CrossBackEnd.Shared.Infra.Converters;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
-using CrossBackEnd.GeoLocation.Application.ViewModels;
-using System.Collections.Generic;
+using CrossBackEnd.Shared.Infra.Resolvers;
+using System.Reflection;
+using CrossBackEnd.Shared.Infra.Converters;
 
 namespace CrossBackEnd.Shared.Infra.Services
 {
@@ -23,16 +23,15 @@ namespace CrossBackEnd.Shared.Infra.Services
         {
             this._serializerSettings = new JsonSerializerSettings
             {
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                ContractResolver = new CrossBackEndContractResolver(),
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore
             };
 
             this._serializerSettings.Converters.Add(new StringEnumConverter());
-           // this._serializerSettings.Converters.Add(new GuidConverter());
         }
 
-        public TResult Get<TResult>(string uri, string token = "")
+        public IExecutionResult<TResult> Get<TResult>(string uri, string token = "")
         {
             HttpClient request = new HttpClient();
             HttpResponseMessage response;
@@ -46,24 +45,40 @@ namespace CrossBackEnd.Shared.Infra.Services
                                         .GetAwaiter()
                                         .GetResult();
 
-            var item = JsonConvert.DeserializeObject<TResult>(content, this._serializerSettings);
+            var item = JsonConvert.DeserializeObject<ExecutionResult<TResult>>(content, this._serializerSettings);
             
             return item;
         }
 
-        public Task<TResult> GetAsync<TResult>(string uri, string token = "")
+        public async Task<IExecutionResult<TResult>> GetAsync<TResult>(string uri, string token = "")
         {
             HttpClient request = new HttpClient();
-            HttpResponseMessage response;
+            HttpResponseMessage response = null;
             string content;
+            IExecutionResult<TResult> item;
 
-            response = request.GetAsync(uri).GetAwaiter().GetResult();
+            try
+            {
+                response = request.GetAsync(uri).GetAwaiter().GetResult();
 
-            content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                
+                item = JsonConvert.DeserializeObject<ExecutionResult<TResult>>(content, this._serializerSettings);
+            }
+            catch(Exception e)
+            {
+                item = new ExecutionResult<TResult>();
+                
+                item.SystemErrors.Add(new Message(e.Message.ToString()));
+            }
+
+            request.Dispose();
+            request = null;
+
+            if (response != null)
+                response.Dispose();
             
-            TResult item = JsonConvert.DeserializeObject<TResult>(content, this._serializerSettings);
-
-            return Task.FromResult(item);
+            return item;
         }
 
         public Task<TResult> PostAsync<TResult>(string uri, TResult data, string token = "")

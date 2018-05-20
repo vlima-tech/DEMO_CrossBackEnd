@@ -1,11 +1,12 @@
 ﻿
+using System;
+
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
 
 namespace CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain
 {
-    public interface IModel
+    public interface IModel : IDisposable
     {
-        void Dispose();
         ExecutionResult<bool> IsValid();
     }
 }

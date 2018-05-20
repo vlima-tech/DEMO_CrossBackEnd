@@ -13,13 +13,16 @@ namespace CrossBackEnd.Shared.Kernel.Core.MVVM
 {
     public class BaseViewModel<TViewModel> : IViewModel where TViewModel : IViewModel
     {
-        public IBaseCollection<ValidationResult> ValidationResult { get; private set; }
-        public bool IsValid { get { return this.ValidationResult.Count.Equals(0); } }
+        
+        //public IBaseCollection<ValidationResult> ValidationResult { get; private set; }
+
+        //public bool IsValid { get { return this.ValidationResult.Count.Equals(0); } }
+        public bool IsValid() { return true; }
         public event PropertyChangedEventHandler PropertyChanged;
         
         public BaseViewModel()
         {
-            this.ValidationResult = new BaseCollection<ValidationResult>();
+            //this.ValidationResult = new BaseCollection<ValidationResult>();
         }
         
         public bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
@@ -28,6 +31,8 @@ namespace CrossBackEnd.Shared.Kernel.Core.MVVM
                 return false;
 
             storage = value;
+
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
             return true;
         }
