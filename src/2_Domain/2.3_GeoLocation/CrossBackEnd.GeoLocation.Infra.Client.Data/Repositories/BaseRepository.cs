@@ -27,7 +27,7 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
         public BaseRepository(IRequestService requestService, IConfiguration configuration)
         {
             this.RequestService = requestService;
-
+            
             this.Settings = configuration.Get<Settings>();
         }
 

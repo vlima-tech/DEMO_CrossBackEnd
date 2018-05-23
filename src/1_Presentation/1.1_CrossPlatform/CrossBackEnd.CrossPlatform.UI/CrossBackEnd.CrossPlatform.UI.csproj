@@ -34,6 +34,9 @@
     <EmbeddedResource Update="Bootstrap\Android\AndroidRootPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Bootstrap\Windows\WindowsRootPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\GeoLocation\CountryDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -49,6 +52,11 @@
     <EmbeddedResource Update="Views\_Menus\MainMenuPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Bootstrap\IOS\" />
+    <Folder Include="Bootstrap\Mac\" />
   </ItemGroup>
 
 </Project>

@@ -12,6 +12,7 @@ using CrossBackEnd.CrossPlatform.Infra.IoC;
 using CrossBackEnd.CrossPlatform.UI.Bootstrap.Android;
 using CrossBackEnd.CrossPlatform.UI.Views._Menus;
 using CrossBackEnd.GeoLocation.Infra.Client.IoC;
+using CrossBackEnd.CrossPlatform.UI.Bootstrap.Windows;
 
 namespace CrossBackEnd.CrossPlatform.UI
 {
@@ -34,6 +35,10 @@ namespace CrossBackEnd.CrossPlatform.UI
                     break;
 
                 case Device.iOS:
+                    break;
+
+                case Device.WPF:
+                    MainPage = new WindowsRootPage();
                     break;
             }
 
