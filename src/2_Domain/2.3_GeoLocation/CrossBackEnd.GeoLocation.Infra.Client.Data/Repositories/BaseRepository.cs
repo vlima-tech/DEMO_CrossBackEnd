@@ -3,19 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 using Microsoft.Extensions.Configuration;
 
-using CrossBackEnd.GeoLocation.Application.ViewModels;
 using CrossBackEnd.Shared.Infra.Abstractions;
 using CrossBackEnd.Shared.Kernel.Core.Collections;
 using CrossBackEnd.Shared.Kernel.Core.Configuration;
-using CrossBackEnd.Shared.Kernel.Core.Extensions;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
-using System.Threading.Tasks;
 using CrossBackEnd.GeoLocation.Infra.Client.Data.Helpers;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces;
 

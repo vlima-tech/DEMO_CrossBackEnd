@@ -11,6 +11,7 @@ using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
 using System.Threading.Tasks;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces;
 
 namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
 {
@@ -210,9 +211,9 @@ namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
             return execResult;
         }
 
-        public ExecutionResult<IBaseCollection<TEntity>> GetAll()
+        public IExecutionResult<BaseCollection<TEntity>> GetAll()
         {
-            var execResult = new ExecutionResult<IBaseCollection<TEntity>>();
+            var execResult = new ExecutionResult<BaseCollection<TEntity>>();
             
             execResult.DefineResult(
                 new BaseCollection<TEntity>(
@@ -224,9 +225,9 @@ namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
             return execResult;
         }
 
-        public async Task<ExecutionResult<IBaseCollection<TEntity>>> GetAllAsync()
+        public async Task<IExecutionResult<BaseCollection<TEntity>>> GetAllAsync()
         {
-            var execResult = new ExecutionResult<IBaseCollection<TEntity>>();
+            var execResult = new ExecutionResult<BaseCollection<TEntity>>();
 
             execResult.DefineResult(
                 new BaseCollection<TEntity>(

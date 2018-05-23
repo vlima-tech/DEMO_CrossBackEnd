@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\2.1_Shared\CrossBackEnd.Shared.Infra.Abstractions\CrossBackEnd.Shared.Infra.Abstractions.csproj" />
     <ProjectReference Include="..\..\2.1_Shared\CrossBackEnd.Shared.Kernel.Core\CrossBackEnd.Shared.Kernel.Core.csproj" />
-    <ProjectReference Include="..\CrossBackEnd.GeoLocation.Application\CrossBackEnd.GeoLocation.Application.csproj" />
     <ProjectReference Include="..\CrossBackEnd.GeoLocation.Domain\CrossBackEnd.GeoLocation.Domain.csproj" />
   </ItemGroup>
 

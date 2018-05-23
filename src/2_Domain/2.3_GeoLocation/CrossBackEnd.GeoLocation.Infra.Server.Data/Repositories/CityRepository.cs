@@ -6,10 +6,10 @@ using System.Linq.Expressions;
 
 using CrossBackEnd.GeoLocation.Domain.Interfaces.Repositories;
 using CrossBackEnd.GeoLocation.Domain.Models;
-using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
 using CrossBackEnd.GeoLocation.Infra.Server.Data.Context;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
 using CrossBackEnd.Shared.Kernel.Core.Collections;
+using CrossBackEnd.Shared.Kernel.Core.Interfaces;
 
 namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
 {
@@ -20,9 +20,9 @@ namespace CrossBackEnd.GeoLocation.Infra.Server.Data.Repositories
             
         }
 
-        public ExecutionResult<IBaseCollection<City>> Find(Expression<Func<City, bool>> predicate, bool tracking, bool includeState)
+        public IExecutionResult<BaseCollection<City>> Find(Expression<Func<City, bool>> predicate, bool tracking, bool includeState)
         {
-            var execResult = new ExecutionResult<IBaseCollection<City>>();
+            var execResult = new ExecutionResult<BaseCollection<City>>();
             
             if (includeState)
             {
