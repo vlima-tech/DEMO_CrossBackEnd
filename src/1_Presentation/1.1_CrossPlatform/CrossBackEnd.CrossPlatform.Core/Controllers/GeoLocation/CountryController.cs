@@ -11,6 +11,8 @@ using CrossBackEnd.GeoLocation.Application.ViewModels;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.AppServices;
 using CrossBackEnd.Shared.Kernel.Core.Collections;
+using CrossBackEnd.CrossPlatform.Abstractions.Navigation;
+using CrossBackEnd.CrossPlatform.Abstractions.Interactions;
 
 namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
 {
@@ -61,7 +63,8 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
 
         #endregion
 
-        public CountryController(ICountryAppService countryAppService)
+        public CountryController(ICountryAppService countryAppService, INavigationService navigationService, 
+            IInteractionService interactionService) : base(navigationService, interactionService)
         {
             this.Title = "Countries";
 
@@ -101,6 +104,8 @@ namespace CrossBackEnd.CrossPlatform.Core.Controllers.GeoLocation
         
         private async Task SearchCountryCommanAsync()
         {
+            //var action = await DisplayActionSheet<ICountryController>("ActionSheet: Send to?", "Cancel", null, "Email", "Twitter", "Facebook");
+            
             var result = this._countryAppService.LoadAllAsync().GetAwaiter().GetResult();
 
             if (result.Success)

@@ -1,7 +1,5 @@
 ﻿
 using System;
-using System.IO;
-using System.Reflection;
 
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,51 +11,41 @@ using CrossBackEnd.CrossPlatform.UI.Bootstrap.Android;
 using CrossBackEnd.CrossPlatform.UI.Views._Menus;
 using CrossBackEnd.GeoLocation.Infra.Client.IoC;
 using CrossBackEnd.CrossPlatform.UI.Bootstrap.Windows;
+using CrossBackEnd.CrossPlatform.Abstractions.Navigation;
+using CrossBackEnd.CrossPlatform.UI.Services;
+using CrossBackEnd.CrossPlatform.Abstractions.Interactions;
 
 namespace CrossBackEnd.CrossPlatform.UI
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class App : Application
 	{
-        private IServiceCollection _services { get; set; }
         public static IServiceProvider Container { get; private set; }
 
         public App()
         {
             InitializeComponent();
             
-            this._services = new ServiceCollection();
+            this.ConfigureServices(new ServiceCollection());
             
-            switch (Device.RuntimePlatform)
-            {
-                case Device.Android:
-                    MainPage = new AndroidRootPage();
-                    break;
+            var nav = new NavigationService(Container);
 
-                case Device.iOS:
-                    break;
-
-                case Device.WPF:
-                    MainPage = new WindowsRootPage();
-                    break;
-            }
-
-            this.ConfigureServices(this._services);
+            nav.InitializeAsync().GetAwaiter().GetResult();
+            
         }
         
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper();
-            
             services.AddConfiguration<App>();
 
+            services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<IInteractionService, InteractionService>();
+            
             services.AddGeoLocation();
             services.AddCrossPlatform();
-            
-            services.AddScoped<AndroidRootPage>();
-            services.AddScoped<MainMenuPage>();
-            
-            Container = this._services.BuildServiceProvider();
+
+            Container = services.BuildServiceProvider();
         }
     }
 }

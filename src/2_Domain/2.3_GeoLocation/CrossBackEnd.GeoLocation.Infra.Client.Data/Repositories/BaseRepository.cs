@@ -6,7 +6,9 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
+using CrossBackEnd.GeoLocation.Infra.Client.Data.Helpers;
 using CrossBackEnd.Shared.Infra.Abstractions;
 using CrossBackEnd.Shared.Kernel.Core.Collections;
 using CrossBackEnd.Shared.Kernel.Core.Configuration;
@@ -14,7 +16,6 @@ using CrossBackEnd.Shared.Kernel.Core.Interfaces.Collections;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Domain;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces.Repositories;
 using CrossBackEnd.Shared.Kernel.Core.ValueObjects;
-using CrossBackEnd.GeoLocation.Infra.Client.Data.Helpers;
 using CrossBackEnd.Shared.Kernel.Core.Interfaces;
 
 namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
@@ -24,11 +25,29 @@ namespace CrossBackEnd.GeoLocation.Infra.Client.Data.Repositories
         public IRequestService RequestService { get; private set; }
         public Settings Settings { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="requestService"></param>
+        /// <param name="configuration"></param>
         public BaseRepository(IRequestService requestService, IConfiguration configuration)
         {
             this.RequestService = requestService;
             
-            this.Settings = configuration.Get<Settings>();
+            this.Settings = new Settings();
+            configuration.GetSection("CrossPlatform_Settings").Bind(Settings);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="requestService"></param>
+        /// <param name="options"></param>
+        public BaseRepository(IRequestService requestService, IOptions<Settings> options)
+        {
+            this.RequestService = requestService;
+
+            this.Settings = options.Value;
         }
 
         public virtual ExecutionResult<bool> Save(TModel obj)
